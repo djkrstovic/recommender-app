@@ -20,7 +20,7 @@ export class RatingUserEpisode {
   })
   ratingUserEpisodeId: number;
 
-  @Column({ type: "int", name: "user_id", unsigned: true })
+  @Column({ name: "user_id", unsigned: true })
   userId: number;
 
   @Column({ type: "int", name: "episode_id", unsigned: true })

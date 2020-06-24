@@ -9,21 +9,21 @@ import {
 import { Movie } from "./movie.entity";
 import { Tag } from "./tag.entity";
 
-@Index("fk_tag_movie_movie_id", ["movieId"], {})
 @Index("fk_tag_movie_tag_id", ["tagId"], {})
+@Index("fk_tag_movie_movie_id", ["movieId"], {})
 @Entity("tag_movie")
 export class TagMovie {
   @PrimaryGeneratedColumn({
     type: "int",
     name: "tag_movies_id",
-    unsigned: true
+    unsigned: true,
   })
   tagMoviesId: number;
 
   @Column({ type: "int", name: "movie_id", unsigned: true})
   movieId: number;
 
-  @Column({ type: "int", name: "tag_id", unsigned: true})
+  @Column({ type: "int", name: "tag_id", unsigned: true })
   tagId: number;
 
   @ManyToOne(() => Movie, (movie) => movie.tagMovies, {

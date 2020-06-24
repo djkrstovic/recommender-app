@@ -21,28 +21,28 @@ export class User {
     type: "varchar",
     name: "email",
     unique: true,
-    length: 255,
+    length: 255
   })
   email: string;
 
   @Column({
     type: "varchar",
     name: "password_hash",
-    length: 128,
+    length: 128
   })
   passwordHash: string;
 
-  @Column({ type: "varchar", name: "forename", length: 64,})
+  @Column({ type: "varchar", name: "forename", length: 64})
   forename: string;
 
-  @Column({ type: "varchar", name: "surname", length: 64,})
+  @Column({ type: "varchar", name: "surname", length: 64 })
   surname: string;
 
   @Column({
-    type: "varchar", 
+    type: "varchar",
     name: "phone_number",
     unique: true,
-    length: 24,
+    length: 24
   })
   phoneNumber: string;
 

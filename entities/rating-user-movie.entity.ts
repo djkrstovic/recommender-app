@@ -23,7 +23,7 @@ export class RatingUserMovie {
   @Column({ type: "int", name: "user_id", unsigned: true})
   userId: number;
 
-  @Column({ type: "int",  name: "movie_id", unsigned: true})
+  @Column({ type: "int", name: "movie_id", unsigned: true})
   movieId: number;
 
   @Column({

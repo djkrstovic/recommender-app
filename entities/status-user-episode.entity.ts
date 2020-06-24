@@ -16,18 +16,18 @@ export class StatusUserEpisode {
   @PrimaryGeneratedColumn({
     type: "int",
     name: "status_user_episode_id",
-    unsigned: true
+    unsigned: true,
   })
   statusUserEpisodeId: number;
 
-  @Column({ type: "int", name: "user_id", unsigned: true})
+  @Column({ type: "int", name: "user_id", unsigned: true })
   userId: number;
 
-  @Column({ type: "int", name: "episode_id", unsigned: true})
+  @Column({ type: "int", name: "episode_id", unsigned: true })
   episodeId: number;
 
   @Column({
-    type: "enum",
+    type: "enum", 
     name: "status",
     enum: ["gledao", "zeli da gleda", "ne zeli da gleda"],
   })

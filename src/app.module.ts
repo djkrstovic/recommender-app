@@ -14,11 +14,13 @@ import { RatingUserMovie } from 'entities/rating-user-movie.entity';
 import { StatusUserEpisode } from 'entities/status-user-episode.entity';
 import { StatusUserMovie } from 'entities/status-user-movie.entity';
 import { TagMovie } from 'entities/tag-movie.entity';
-import { TagTvSeries } from 'entities/tag-tv-series.entity';
 import { Tag } from 'entities/tag.entity';
 import { TvSeries } from 'entities/tv-series.entity';
 import { User } from 'entities/user.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
+import { MovieController } from './controllers/api/movie.controller';
+import { MovieService } from './services/movie/movie.service';
+import { TagEpisode } from 'entities/tag-episode.entity';
 
 @Module({
   imports: [
@@ -40,19 +42,27 @@ import { AdministratorController } from './controllers/api/administrator.control
         StatusUserEpisode,
         StatusUserMovie,
         TagMovie,
-        TagTvSeries,
+        TagEpisode,
         Tag,
         TvSeries,
         User,
        ]
     }),
-    TypeOrmModule.forFeature([Administrator])
+    TypeOrmModule.forFeature([
+      Administrator,
+      Movie,
+    ])
 
   ],
   controllers: [
     AppController,
     AdministratorController,
+    MovieController,
   ],
-  providers: [AppService, AdministratorService],
+  providers: [
+    AppService,
+    AdministratorService,
+    MovieService,
+  ],
 })
 export class AppModule {}

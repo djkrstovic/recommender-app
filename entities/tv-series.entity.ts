@@ -5,11 +5,9 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Episode } from "./episode.entity";
-import { TagTvSeries } from "./tag-tv-series.entity";
 import { Category } from "./category.entity";
 import { Genre } from "./genre.entity";
 
@@ -20,7 +18,7 @@ export class TvSeries {
   @PrimaryGeneratedColumn({ type: "int", name: "tv_series_id", unsigned: true })
   tvSeriesId: number;
 
-  @Column({ type: "varchar", name: "image_path", nullable: true, length: 128 })
+  @Column({ name: "image_path", nullable: true, length: 128 })
   imagePath: string | null;
 
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
@@ -41,11 +39,8 @@ export class TvSeries {
   @Column({ type: "int", name: "genre_id", unsigned: true })
   genreId: number;
 
-  @OneToOne(() => Episode, (episode) => episode.tvSeries)
-  episode: Episode;
-
-  @OneToMany(() => TagTvSeries, (tagTvSeries) => tagTvSeries.tvSeries)
-  tagTvSeries: TagTvSeries[];
+  @OneToMany(() => Episode, (episode) => episode.tvSeries)
+  episodes: Episode[];
 
   @ManyToOne(() => Category, (category) => category.tvSeries, {
     onDelete: "RESTRICT",

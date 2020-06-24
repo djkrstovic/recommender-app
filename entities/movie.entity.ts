@@ -24,10 +24,10 @@ export class Movie {
   imagePath: string | null;
 
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
-  titleSrbnull;
+  titleSrb: string | null;
 
   @Column({ type: "varchar", name: "title_eng", nullable: true, length: 64 })
-  titleEngnull;
+  titleEng: string | null;
 
   @Column({ type: "varchar", name: "director", nullable: true, length: 64 })
   director: string | null;

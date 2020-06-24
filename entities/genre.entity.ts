@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Movie } from "./movie.entity";
 import { TvSeries } from "./tv-series.entity";
 
-@Entity("genre", { schema: "aplikacija" })
+@Entity("genre")
 export class Genre {
   @PrimaryGeneratedColumn({ type: "int", name: "genre_id", unsigned: true })
   genreId: number;

@@ -3,15 +3,16 @@ import {
   Entity,
   Index,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { TvSeries } from "./tv-series.entity";
 import { RatingUserEpisode } from "./rating-user-episode.entity";
 import { StatusUserEpisode } from "./status-user-episode.entity";
+import { TagEpisode } from "./tag-episode.entity";
 
-@Index("uq_episode_tv_series_id", ["tvSeriesId"], { unique: true })
+@Index("fk_episode_tv_series_id", ["tvSeriesId"], {})
 @Entity("episode")
 export class Episode {
   @PrimaryGeneratedColumn({ type: "int", name: "episode_id", unsigned: true })
@@ -35,10 +36,10 @@ export class Episode {
   @Column({ type: "int", name: "season_episode", unsigned: true })
   seasonEpisode: number;
 
-  @Column({ type: "int", name: "tv_series_id", unique: true, unsigned: true })
+  @Column({ type: "int", name: "tv_series_id", unsigned: true })
   tvSeriesId: number;
 
-  @OneToOne(() => TvSeries, (tvSeries) => tvSeries.episode, {
+  @ManyToOne(() => TvSeries, (tvSeries) => tvSeries.episodes, {
     onDelete: "RESTRICT",
     onUpdate: "CASCADE",
   })
@@ -56,4 +57,7 @@ export class Episode {
     (statusUserEpisode) => statusUserEpisode.episode
   )
   statusUserEpisodes: StatusUserEpisode[];
+
+  @OneToMany(() => TagEpisode, (tagEpisode) => tagEpisode.episode)
+  tagEpisodes: TagEpisode[];
 }

@@ -11,14 +11,15 @@ export class Administrator {
   administratorId: number;
 
   @Column({
-    type: "varchar", 
+    type: "varchar",
+    name: "username",
     unique: true,
     length: 32
   })
   username: string;
 
   @Column({
-    type: "varchar", 
+    type: "varchar",
     name: "password_hash",
     length: 128
   })

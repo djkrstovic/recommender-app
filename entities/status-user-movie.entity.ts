@@ -16,14 +16,14 @@ export class StatusUserMovie {
   @PrimaryGeneratedColumn({
     type: "int",
     name: "status_user_movie_id",
-    unsigned: true
+    unsigned: true,
   })
   statusUserMovieId: number;
 
-  @Column({ type: "int", name: "user_id", unsigned: true})
+  @Column({ type: "int", name: "user_id", unsigned: true })
   userId: number;
 
-  @Column({ type: "int", name: "movie_id", unsigned: true})
+  @Column({ type: "int", name: "movie_id", unsigned: true })
   movieId: number;
 
   @Column({

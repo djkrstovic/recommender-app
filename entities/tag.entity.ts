@@ -5,13 +5,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { TagEpisode } from "./tag-episode.entity";
 import { TagMovie } from "./tag-movie.entity";
-import { TagTvSeries } from "./tag-tv-series.entity";
 
 @Index("uq_tag_tag_name", ["tagName"], { unique: true })
 @Entity("tag")
 export class Tag {
-  @PrimaryGeneratedColumn({ type: "int", name: "tag_id", unsigned: true})
+  @PrimaryGeneratedColumn({ type: "int", name: "tag_id", unsigned: true })
   tagId: number;
 
   @Column({
@@ -22,9 +22,9 @@ export class Tag {
   })
   tagName: string;
 
+  @OneToMany(() => TagEpisode, (tagEpisode) => tagEpisode.tag)
+  tagEpisodes: TagEpisode[];
+
   @OneToMany(() => TagMovie, (tagMovie) => tagMovie.tag)
   tagMovies: TagMovie[];
-
-  @OneToMany(() => TagTvSeries, (tagTvSeries) => tagTvSeries.tag)
-  tagTvSeries: TagTvSeries[];
 }
