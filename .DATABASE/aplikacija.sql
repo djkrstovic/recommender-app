@@ -46,7 +46,6 @@ INSERT INTO `category` (`category_id`, `name`) VALUES
 DROP TABLE IF EXISTS `episode`;
 CREATE TABLE IF NOT EXISTS `episode` (
   `episode_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `title_srb` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `title_eng` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `synopsis` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
@@ -60,11 +59,11 @@ CREATE TABLE IF NOT EXISTS `episode` (
 
 DELETE FROM `episode`;
 /*!40000 ALTER TABLE `episode` DISABLE KEYS */;
-INSERT INTO `episode` (`episode_id`, `image_path`, `title_srb`, `title_eng`, `synopsis`, `season`, `season_episode`, `tv_series_id`) VALUES
-	(6, NULL, 'Dolazi zima', 'Winter Is Coming', 'Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.', 1, 1, 1),
-	(7, NULL, 'Kraljev put', 'The Kingsroad', 'While Bran recovers from his fall, Ned takes only his daughters to King\'s Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.', 1, 2, 1),
-	(15, 'putanja1', 'neka epizoda', 'some episode', 'Sinopsis nekog filma', 1, 3, 1),
-	(16, 'putanja1', 'neka epizoda', 'some episode', 'Sinopsis nekog filma', 1, 2, 1);
+INSERT INTO `episode` (`episode_id`, `title_srb`, `title_eng`, `synopsis`, `season`, `season_episode`, `tv_series_id`) VALUES
+	(6, 'Dolazi zima', 'Winter Is Coming', 'Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.', 1, 1, 1),
+	(7, 'Kraljev put', 'The Kingsroad', 'While Bran recovers from his fall, Ned takes only his daughters to King\'s Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.', 1, 2, 1),
+	(15, 'neka epizoda', 'some episode', 'Sinopsis nekog filma', 1, 3, 1),
+	(16, 'neka epizoda', 'some episode', 'Sinopsis nekog filma', 1, 2, 1);
 /*!40000 ALTER TABLE `episode` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `genre`;
@@ -95,7 +94,6 @@ INSERT INTO `genre` (`genre_id`, `name`) VALUES
 DROP TABLE IF EXISTS `movie`;
 CREATE TABLE IF NOT EXISTS `movie` (
   `movie_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(128) DEFAULT NULL,
   `title_srb` varchar(64) DEFAULT NULL,
   `title_eng` varchar(64) DEFAULT NULL,
   `director` varchar(64) DEFAULT NULL,
@@ -111,10 +109,55 @@ CREATE TABLE IF NOT EXISTS `movie` (
 
 DELETE FROM `movie`;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` (`movie_id`, `image_path`, `title_srb`, `title_eng`, `director`, `synopsis`, `category_id`, `genre_id`) VALUES
-	(1, NULL, 'Zima', 'Winter', 'Sergey Chernikov', 'On a gas station, Alexander and his father are attacked. The father dies, and Alexander becomes a dangerous witness. He is forced to start the persecution himself and very soon turns from a victim into a cold-blooded hunter.', 1, 1),
-	(2, 'putanja', 'neki film', 'some movie', 'pera peric', 'Sinopsis nekog filma', 1, 3);
+INSERT INTO `movie` (`movie_id`, `title_srb`, `title_eng`, `director`, `synopsis`, `category_id`, `genre_id`) VALUES
+	(1, 'Zima', 'Winter', 'Sergey Chernikov', 'On a gas station, Alexander and his father are attacked. The father dies, and Alexander becomes a dangerous witness. He is forced to start the persecution himself and very soon turns from a victim into a cold-blooded hunter.', 1, 1),
+	(2, 'neki film', 'some movie', 'pera peric', 'Sinopsis nekog filma', 1, 3);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
+
+DROP TABLE IF EXISTS `photo_episode`;
+CREATE TABLE IF NOT EXISTS `photo_episode` (
+  `photo_episode_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `episode_id` int unsigned NOT NULL,
+  `image_path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`photo_episode_id`),
+  UNIQUE KEY `uq_photo_episode_image_path` (`image_path`),
+  KEY `fk_photo_episode_episode` (`episode_id`),
+  CONSTRAINT `fk_photo_episode_episode` FOREIGN KEY (`episode_id`) REFERENCES `episode` (`episode_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DELETE FROM `photo_episode`;
+/*!40000 ALTER TABLE `photo_episode` DISABLE KEYS */;
+/*!40000 ALTER TABLE `photo_episode` ENABLE KEYS */;
+
+DROP TABLE IF EXISTS `photo_movie`;
+CREATE TABLE IF NOT EXISTS `photo_movie` (
+  `photo_movie_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `movie_id` int unsigned NOT NULL,
+  `image_path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`photo_movie_id`),
+  UNIQUE KEY `uq_photo_movie_image_path` (`image_path`),
+  KEY `fk_photo_movie_movie` (`movie_id`),
+  CONSTRAINT `fk_photo_movie_movie` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DELETE FROM `photo_movie`;
+/*!40000 ALTER TABLE `photo_movie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `photo_movie` ENABLE KEYS */;
+
+DROP TABLE IF EXISTS `photo_tv_series`;
+CREATE TABLE IF NOT EXISTS `photo_tv_series` (
+  `photo_tv_series_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `tv_series_id` int unsigned NOT NULL,
+  `image_path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`photo_tv_series_id`),
+  UNIQUE KEY `uq_photo_tv_series_image_path` (`image_path`),
+  KEY `fk_photo_tv_series_tv_series` (`tv_series_id`),
+  CONSTRAINT `fk_photo_tv_series_tv_series` FOREIGN KEY (`tv_series_id`) REFERENCES `tv_series` (`tv_series_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DELETE FROM `photo_tv_series`;
+/*!40000 ALTER TABLE `photo_tv_series` DISABLE KEYS */;
+/*!40000 ALTER TABLE `photo_tv_series` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `rating_user_episode`;
 CREATE TABLE IF NOT EXISTS `rating_user_episode` (
@@ -267,7 +310,6 @@ INSERT INTO `tag_movie` (`tag_movies_id`, `movie_id`, `tag_id`) VALUES
 DROP TABLE IF EXISTS `tv_series`;
 CREATE TABLE IF NOT EXISTS `tv_series` (
   `tv_series_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `image_path` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `title_srb` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `title_eng` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `director` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -283,9 +325,9 @@ CREATE TABLE IF NOT EXISTS `tv_series` (
 
 DELETE FROM `tv_series`;
 /*!40000 ALTER TABLE `tv_series` DISABLE KEYS */;
-INSERT INTO `tv_series` (`tv_series_id`, `image_path`, `title_srb`, `title_eng`, `director`, `synopsis`, `category_id`, `genre_id`) VALUES
-	(1, NULL, 'Igra prestola', 'Game of Thrones ', 'David Benioff', 'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.', 2, 2),
-	(2, 'putanja1', 'neka tv serija', 'some tv series', 'mika mikic', 'Sinopsis neke serije', 2, 4);
+INSERT INTO `tv_series` (`tv_series_id`, `title_srb`, `title_eng`, `director`, `synopsis`, `category_id`, `genre_id`) VALUES
+	(1, 'Igra prestola', 'Game of Thrones ', 'David Benioff', 'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.', 2, 2),
+	(2, 'neka tv serija', 'some tv series', 'mika mikic', 'Sinopsis neke serije', 2, 4);
 /*!40000 ALTER TABLE `tv_series` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `user`;
