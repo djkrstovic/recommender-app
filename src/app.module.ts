@@ -35,6 +35,9 @@ import { UserController } from './controllers/api/user.controller';
 import { UserService } from './services/user/user.service';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { PhotoMovie } from 'entities/photo-movie.entity';
+import { PhotoEpisode } from 'entities/photo-episode.entity';
+import { PhotoTvSeries } from 'entities/photo-tv-series.entity';
 
 @Module({
   imports: [
@@ -60,6 +63,9 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
         Tag,
         TvSeries,
         User,
+        PhotoMovie,
+        PhotoEpisode,
+        PhotoTvSeries,
        ]
     }),
     TypeOrmModule.forFeature([

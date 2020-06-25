@@ -10,6 +10,7 @@ import {
 import { Episode } from "./episode.entity";
 import { Category } from "./category.entity";
 import { Genre } from "./genre.entity";
+import { PhotoTvSeries } from "./photo-tv-series.entity";
 
 @Index("fk_tv_series_category_id", ["categoryId"], {})
 @Index("fk_tv_series_genre_id", ["genreId"], {})
@@ -41,6 +42,9 @@ export class TvSeries {
 
   @OneToMany(() => Episode, (episode) => episode.tvSeries)
   episodes: Episode[];
+
+  @OneToMany(() => PhotoTvSeries, (photoTvSeries) => photoTvSeries.tvSeries)
+  photoTvSeries: PhotoTvSeries[];
 
   @ManyToOne(() => Category, (category) => category.tvSeries, {
     onDelete: "RESTRICT",

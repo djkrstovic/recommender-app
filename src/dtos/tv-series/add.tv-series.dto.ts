@@ -5,6 +5,5 @@ export class AddTvSeriesDto {
     synopsis    : string;
     categoryId  : number;
     genreId     : number;
-    imagePath   : string;
 }
 

@@ -5,7 +5,6 @@ export class AddMovieDto {
     synopsis    : string;
     categoryId  : number;
     genreId     : number;
-    imagePath   : string;
     tags        : {
         tagId: number;
     }[];

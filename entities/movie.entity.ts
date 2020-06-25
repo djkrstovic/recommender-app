@@ -15,6 +15,7 @@ import { RatingUserMovie } from "./rating-user-movie.entity";
 import { StatusUserMovie } from "./status-user-movie.entity";
 import { TagMovie } from "./tag-movie.entity";
 import { Tag } from "./tag.entity";
+import { PhotoMovie } from "./photo-movie.entity";
 
 @Index("fk_movie_category_id", ["categoryId"], {})
 @Index("fk_movie_genre_id", ["genreId"], {})
@@ -22,9 +23,6 @@ import { Tag } from "./tag.entity";
 export class Movie {
   @PrimaryGeneratedColumn({ type: "int", name: "movie_id", unsigned: true })
   movieId: number;
-
-  @Column({ type: "varchar", name: "image_path", nullable: true, length: 128 })
-  imagePath: string | null;
 
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
   titleSrb: string | null;
@@ -57,6 +55,9 @@ export class Movie {
   })
   @JoinColumn([{ name: "genre_id", referencedColumnName: "genreId" }])
   genre: Genre;
+
+  @OneToMany(() => PhotoMovie, (photoMovie) => photoMovie.movie)
+  photoMovies: PhotoMovie[];
 
   @OneToMany(() => RatingUserMovie, (ratingUserMovie) => ratingUserMovie.movie)
   ratingUserMovies: RatingUserMovie[];

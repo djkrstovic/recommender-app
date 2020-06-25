@@ -14,15 +14,13 @@ import { RatingUserEpisode } from "./rating-user-episode.entity";
 import { StatusUserEpisode } from "./status-user-episode.entity";
 import { TagEpisode } from "./tag-episode.entity";
 import { Tag } from "./tag.entity";
+import { PhotoEpisode } from "./photo-episode.entity";
 
 @Index("fk_episode_tv_series_id", ["tvSeriesId"], {})
 @Entity("episode")
 export class Episode {
   @PrimaryGeneratedColumn({ type: "int", name: "episode_id", unsigned: true })
   episodeId: number;
-
-  @Column({ type: "varchar", name: "image_path", nullable: true, length: 128 })
-  imagePath: string | null;
 
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
   titleSrb: string | null;
@@ -48,6 +46,9 @@ export class Episode {
   })
   @JoinColumn([{ name: "tv_series_id", referencedColumnName: "tvSeriesId" }])
   tvSeries: TvSeries;
+
+  @OneToMany(() => PhotoEpisode, (photoEpisode) => photoEpisode.episode)
+  photoEpisodes: PhotoEpisode[];
 
   @OneToMany(
     () => RatingUserEpisode,

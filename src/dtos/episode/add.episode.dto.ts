@@ -5,7 +5,6 @@ export class AddEpisodeDto {
     season      : number;
     seasonEpisode: number;
     tvSeriesId    : number;
-    imagePath   : string;
     tags        : {
         tagId: number;
     }[];
