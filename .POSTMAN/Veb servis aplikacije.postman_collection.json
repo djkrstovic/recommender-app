@@ -1,0 +1,1574 @@
+{
+	"info": {
+		"_postman_id": "f553a0bf-3f23-4427-a4c6-3d424abda9a6",
+		"name": "Veb servis aplikacije",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "Get all administrators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all administrators",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "246"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f6-dtGEO6yTqLiTyRYtjqw2fg19FhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 18:40:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"admin\",\n        \"passwordHash\": \"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\"\n    },\n    {\n        \"administratorId\": 2,\n        \"username\": \"test\",\n        \"passwordHash\": \"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get a single administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/2/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"2",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/2/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"2",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "121"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79-1nTWAsN5vGRGfCSWU95Lp+YTGZ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 18:42:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 2,\n    \"username\": \"test\",\n    \"passwordHash\": \"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a single non-existing administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/666",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"666"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get a single non-existing administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/666",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"666"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-qLltB/LHPhIAAHVdWhhaz1/d3Js\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 19:29:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"errorCode\": -1002,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Add a new administrator",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin-test2\",\r\n    \"password\": \"admin-test2\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add a new administrator - success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"test2\",\r\n    \"password\": \"test2\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator?",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-bxQ2ssyU7e7ZKQvAenzQmxRzcR4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 18:46:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"test2\",\n    \"passwordHash\": \"6D201BEEEFB589B08EF0672DAC82353D0CBD9AD99E1642C83A1601F3D647BCCA003257B5E8F31BDC1D73FBEC84FB085C79D6E2677B7FF927E823A54E789140D9\",\n    \"administratorId\": 3\n}"
+						},
+						{
+							"name": "Add a new administrator - error - username taken ",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"test3\",\r\n    \"password\": \"test3\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-QiVX46wlHiVooTZqHRGIY3bDI/8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 19:09:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"errorCode\": -1001,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit an existing administrator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"test\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit an existing administrator - ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"admin\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-TKRkIJvDuZnFOWCTRhzCfrT3djQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 19:14:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"admin\",\n    \"passwordHash\": \"C7AD44CBAD762A5DA0A452F9E854FDC1E0E7A52A38015F23F3EAB1D80B931DD472634DFAC71CD34EBC35D16AB7FB8A90C81F975113D6C7538DC69DD8DE9077EC\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit a non-existing administrator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"pikacu\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/666",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"666"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit a non-existing administrator",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"pikacu\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/666",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"666"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-8XlWq4VfNkHG1GPeXdM8TDyaxys\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jun 2020 19:21:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"errorCode\": -2001,\n    \"message\": null\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9d67d5be-921e-41b7-8685-fac96265d8f3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9dd3f41b-4f11-43c4-befd-6d4889b9000e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "POST createFull",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titleSrb\"    : \"neki film\",\r\n    \"titleEng\"    : \"some movie\",\r\n    \"director\"    : \"pera peric\",\r\n    \"synopsis\"    : \"Sinopsis nekog filma\",\r\n    \"categoryId\"  : 1,\r\n    \"genreId\"     : 3,\r\n    \"imagePath\"   : \"putanja\",\r\n    \"tags\"        : [\r\n        {\r\n            \"tagId\": 3\r\n        },\r\n        {\r\n            \"tagId\": 4\r\n        },\r\n        {\r\n            \"tagId\": 6\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movie/createFull/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movie",
+								"createFull",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createFull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titleSrb\"    : \"neki film\",\r\n    \"titleEng\"    : \"some movie\",\r\n    \"director\"    : \"pera peric\",\r\n    \"synopsis\"    : \"Sinopsis nekog filma\",\r\n    \"categoryId\"  : 1,\r\n    \"genreId\"     : 3,\r\n    \"imagePath\"   : \"putanja\",\r\n    \"tags\"        : [\r\n        {\r\n            \"tagId\": 3\r\n        },\r\n        {\r\n            \"tagId\": 4\r\n        },\r\n        {\r\n            \"tagId\": 6\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/movie/createFull/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movie",
+										"createFull",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "486"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e6-53vHrItj6Yo2NQEmuXB7OtWMqfU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 10:24:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"movieId\": 2,\n    \"imagePath\": \"putanja\",\n    \"titleSrb\": \"neki film\",\n    \"titleEng\": \"some movie\",\n    \"director\": \"pera peric\",\n    \"synopsis\": \"Sinopsis nekog filma\",\n    \"categoryId\": 1,\n    \"genreId\": 3,\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Movie\"\n    },\n    \"genre\": {\n        \"genreId\": 3,\n        \"name\": \"Thriller\"\n    },\n    \"tag\": [\n        {\n            \"tagId\": 3,\n            \"tagName\": \"Dramatic\"\n        },\n        {\n            \"tagId\": 4,\n            \"tagName\": \"Fun\"\n        },\n        {\n            \"tagId\": 6,\n            \"tagName\": \"Touching\"\n        }\n    ],\n    \"tagMovies\": [\n        {\n            \"tagMoviesId\": 4,\n            \"movieId\": 2,\n            \"tagId\": 3\n        },\n        {\n            \"tagMoviesId\": 5,\n            \"movieId\": 2,\n            \"tagId\": 4\n        },\n        {\n            \"tagMoviesId\": 6,\n            \"movieId\": 2,\n            \"tagId\": 6\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1d31f3c5-b7e0-4761-a5bd-dfac65017642",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2211300e-5996-4471-a884-fcbb8e7fd2fe",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tv-Series",
+			"item": [
+				{
+					"name": "POST createFull",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titleSrb\"    : \"neka tv serija\",\r\n    \"titleEng\"    : \"some tv series\",\r\n    \"director\"    : \"mika mikic\",\r\n    \"synopsis\"    : \"Sinopsis neke serije\",\r\n    \"categoryId\"  : 2,\r\n    \"genreId\"     : 4,\r\n    \"imagePath\"   : \"putanja1\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/series/createFull/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"series",
+								"createFull",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createFull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titleSrb\"    : \"neka tv serija\",\r\n    \"titleEng\"    : \"some tv series\",\r\n    \"director\"    : \"mika mikic\",\r\n    \"synopsis\"    : \"Sinopsis neke serije\",\r\n    \"categoryId\"  : 2,\r\n    \"genreId\"     : 4,\r\n    \"imagePath\"   : \"putanja1\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/series/createFull/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"series",
+										"createFull",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "264"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"108-XUnajbiiBAwB2vTWDWJnJBsLAyc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 10:51:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tvSeriesId\": 2,\n    \"imagePath\": \"putanja1\",\n    \"titleSrb\": \"neka tv serija\",\n    \"titleEng\": \"some tv series\",\n    \"director\": \"mika mikic\",\n    \"synopsis\": \"Sinopsis neke serije\",\n    \"categoryId\": 2,\n    \"genreId\": 4,\n    \"category\": {\n        \"categoryId\": 2,\n        \"name\": \"TV Series\"\n    },\n    \"genre\": {\n        \"genreId\": 4,\n        \"name\": \"Crime\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d5b97d33-38ad-4236-9d8f-99bf60675c7c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7188ea46-f075-4190-8b60-059128be506f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Episode",
+			"item": [
+				{
+					"name": "POST createFull",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titleSrb\"    : \"neka epizoda\",\r\n    \"titleEng\"    : \"some episode\",\r\n    \"synopsis\"    : \"Sinopsis nekog filma\",\r\n    \"season\"      : 1,\r\n    \"seasonEpisode\":2,\r\n    \"tvSeriesId\"  : 1,\r\n    \"imagePath\"   : \"putanja1\",\r\n    \"tags\"        : [\r\n        {\r\n            \"tagId\": 7\r\n        },\r\n        {\r\n            \"tagId\": 8\r\n        },\r\n        {\r\n            \"tagId\": 9\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/episode/createFull/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"episode",
+								"createFull",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createFull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titleSrb\"    : \"neka epizoda\",\r\n    \"titleEng\"    : \"some episode\",\r\n    \"synopsis\"    : \"Sinopsis nekog filma\",\r\n    \"season\"      : 1,\r\n    \"seasonEpisode\":2,\r\n    \"tvSeriesId\"  : 1,\r\n    \"imagePath\"   : \"putanja1\",\r\n    \"tags\"        : [\r\n        {\r\n            \"tagId\": 7\r\n        },\r\n        {\r\n            \"tagId\": 8\r\n        },\r\n        {\r\n            \"tagId\": 9\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/episode/createFull/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"episode",
+										"createFull",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "727"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d7-kpxXzlxbVrxQGP/PPOSuMB38nTk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 12:30:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"episodeId\": 16,\n    \"imagePath\": \"putanja1\",\n    \"titleSrb\": \"neka epizoda\",\n    \"titleEng\": \"some episode\",\n    \"synopsis\": \"Sinopsis nekog filma\",\n    \"season\": 1,\n    \"seasonEpisode\": 2,\n    \"tvSeriesId\": 1,\n    \"tag\": [\n        {\n            \"tagId\": 7,\n            \"tagName\": \"Mysterious\"\n        },\n        {\n            \"tagId\": 8,\n            \"tagName\": \"Scary\"\n        },\n        {\n            \"tagId\": 9,\n            \"tagName\": \"Shocking\"\n        }\n    ],\n    \"tagEpisodes\": [\n        {\n            \"tagEpisodeId\": 29,\n            \"episodeId\": 16,\n            \"tagId\": 7\n        },\n        {\n            \"tagEpisodeId\": 30,\n            \"episodeId\": 16,\n            \"tagId\": 8\n        },\n        {\n            \"tagEpisodeId\": 31,\n            \"episodeId\": 16,\n            \"tagId\": 9\n        }\n    ],\n    \"tvSeries\": {\n        \"tvSeriesId\": 1,\n        \"imagePath\": null,\n        \"titleSrb\": \"Igra prestola\",\n        \"titleEng\": \"Game of Thrones \",\n        \"director\": \"David Benioff\",\n        \"synopsis\": \"Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.\",\n        \"categoryId\": 2,\n        \"genreId\": 2\n    }\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "74559205-ed5a-410b-bf7d-5f82bc3fe4e8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f5e5419b-20ac-42cc-b9c3-e2866a245309",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "POST createTag",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tagName\"    : \"Novi tag\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tags/createTag/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tags",
+								"createTag",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createTag",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tagName\"    : \"Novi tag\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/tags/createTag/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"tags",
+										"createTag",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-RtCkfS8HMcLywS4iWwCGrfLwtEg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 12:20:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tagId\": 11,\n    \"tagName\": \"Novi tag\",\n    \"tagEpisodes\": [],\n    \"tagMovies\": []\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3ce5de0b-1c20-4d7e-90cc-07386d38e88d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "485a5b1b-f364-406b-b8b2-573ddcce5782",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "POST createGenre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\"    : \"Novi zanr\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/genres/createGenre/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"genres",
+								"createGenre",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createGenre",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\"    : \"Novi zanr\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/genres/createGenre/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"genres",
+										"createGenre",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3b-YH9Z9rusIAdfTnIaLWB9eLfBSxE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 12:30:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"genreId\": 13,\n    \"name\": \"Novi zanr\",\n    \"movies\": [],\n    \"tvSeries\": []\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTM5MTMuMzkyLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMTA0MzEzfQ.PVtLvRacAx4NcTEOnD8IKKKk70mL8TAaJYN6ZZXYEtQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "adf59d37-1df8-43c4-b641-5a274aaa3945",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "01da796b-b33c-4dde-9a59-ae2e1da59c6a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login - when the administrator does not exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"test1\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-+8YOfwbsgNLzIb/ZMeGMi1T4KI4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 15:34:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"errorCode\": -3001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Login - admin token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "307"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"133-V5ZaCW/iCW7VSv7GgzyVhXvKZxs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 16:32:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"admin\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTQzMTIzNDUuMTk3LCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5MzEwMjc0NX0.SAxlrLQ1ReSy0EQmkv4O0-Xh2i2SkWFkNrlFLBgjd-8\"\n}"
+						},
+						{
+							"name": "Login - when the administrator exists and password is correct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test\"\r\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "293"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"125-B/UwKalvX+57s/Jr919sX9+c17M\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 15:30:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 2,\n    \"username\": \"test\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjIsInVzZXJuYW1lIjoidGVzdCIsImV4dCI6MC4wMDksImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4xIiwiaWF0IjoxNTkzMDk5MDQxfQ.5uBoY3h3vKGfC6cDrmHHXYTyO8X-4P-7UQxMwLl9TC0\"\n}"
+						},
+						{
+							"name": "Login - when the administrator is exists, but the password is not correct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test1\"\r\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-oaUb1lySXMNy06G+4VrNcKZyLdo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jun 2020 15:34:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"errorCode\": -3002,\n    \"message\": null\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
