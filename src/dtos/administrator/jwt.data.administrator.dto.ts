@@ -8,10 +8,10 @@ export class JwtDataAdministratorDto{
     toPlainObject(){
         return{
             administratorId : this.administratorId,
-            username : this.username,
-            ext : this.ext,
-            ip : this.ip,
-            ua : this.ua,
+            username        : this.username,
+            ext             : this.ext,
+            ip              : this.ip,
+            ua              : this.ua,
         }
     }
 }

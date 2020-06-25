@@ -1,4 +1,4 @@
-import { Module, Get } from '@nestjs/common';
+import { Module, Get, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from'@nestjs/typeorm';
@@ -34,6 +34,7 @@ import { GenreService } from './services/genre/genre.service';
 import { UserController } from './controllers/api/user.controller';
 import { UserService } from './services/user/user.service';
 import { AuthController } from './controllers/api/auth.controller';
+import { AuthMiddleware } from './middlewares/auth.middleware';
 
 @Module({
   imports: [
@@ -99,5 +100,15 @@ import { AuthController } from './controllers/api/auth.controller';
     UserService,
     TvSeriesService,
   ],
+  exports:[
+    AdministratorService,
+  ]
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('auth/*')
+      .forRoutes('api/*')
+  }
+}
