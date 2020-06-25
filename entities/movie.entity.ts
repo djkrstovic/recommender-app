@@ -6,12 +6,15 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany,
 } from "typeorm";
 import { Category } from "./category.entity";
 import { Genre } from "./genre.entity";
 import { RatingUserMovie } from "./rating-user-movie.entity";
 import { StatusUserMovie } from "./status-user-movie.entity";
 import { TagMovie } from "./tag-movie.entity";
+import { Tag } from "./tag.entity";
 
 @Index("fk_movie_category_id", ["categoryId"], {})
 @Index("fk_movie_genre_id", ["genreId"], {})
@@ -61,6 +64,14 @@ export class Movie {
   @OneToMany(() => StatusUserMovie, (statusUserMovie) => statusUserMovie.movie)
   statusUserMovies: StatusUserMovie[];
 
+  @ManyToMany(type => Tag)
+  @JoinTable({
+    name: 'tag_movie',
+    joinColumn: { name: 'movie_id', referencedColumnName: 'movieId' },
+    inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'tagId' },
+  })
+  tag: Tag[];
+  
   @OneToMany(() => TagMovie, (tagMovie) => tagMovie.movie)
   tagMovies: TagMovie[];
 }

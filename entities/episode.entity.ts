@@ -6,11 +6,14 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { TvSeries } from "./tv-series.entity";
 import { RatingUserEpisode } from "./rating-user-episode.entity";
 import { StatusUserEpisode } from "./status-user-episode.entity";
 import { TagEpisode } from "./tag-episode.entity";
+import { Tag } from "./tag.entity";
 
 @Index("fk_episode_tv_series_id", ["tvSeriesId"], {})
 @Entity("episode")
@@ -57,6 +60,14 @@ export class Episode {
     (statusUserEpisode) => statusUserEpisode.episode
   )
   statusUserEpisodes: StatusUserEpisode[];
+
+  @ManyToMany(type => Tag)
+  @JoinTable({
+    name: 'tag_episode',
+    joinColumn: { name: 'episode_id', referencedColumnName: 'episodeId' },
+    inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'tagId' },
+  })
+  tag: Tag[];
 
   @OneToMany(() => TagEpisode, (tagEpisode) => tagEpisode.episode)
   tagEpisodes: TagEpisode[];

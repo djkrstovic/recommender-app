@@ -1,32 +1,29 @@
 import { Controller } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Movie } from "entities/movie.entity";
-import { MovieService } from "src/services/movie/movie.service";
+import { Episode } from "entities/episode.entity";
+import { EpisodeService } from "src/services/episode/episode.service";
 
-@Controller('api/movie')
+@Controller('api/episode')
 @Crud({
     model: {
-        type: Movie
+        type: Episode
     },
     params: {
         id: {
-            field: 'movieId',
+            field: 'episodeId',
             type: 'number',
             primary: true
         }
     },
     query:{
         join:{
-            category:{
+            tvSeries:{
                 eager: true
             },
-            genre:{
+            ratingUserEpisodes:{
                 eager: true
             },
-            tagMovies:{
-                eager: true
-            },
-            ratingUserMovies:{
+            tagEpisodes:{
                 eager: true
             },
             tag:{
@@ -35,6 +32,6 @@ import { MovieService } from "src/services/movie/movie.service";
         }
     }
 })
-export class MovieController{
-    constructor(public service: MovieService){}
+export class EpisodeController{
+    constructor(public service: EpisodeService){}
 }

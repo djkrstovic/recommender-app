@@ -4,11 +4,14 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany,
 } from "typeorm";
 import { RatingUserEpisode } from "./rating-user-episode.entity";
 import { RatingUserMovie } from "./rating-user-movie.entity";
 import { StatusUserEpisode } from "./status-user-episode.entity";
 import { StatusUserMovie } from "./status-user-movie.entity";
+import { Episode } from "./episode.entity";
 
 @Index("uq_user_email", ["email"], { unique: true })
 @Index("uq_user_phone_number", ["phoneNumber"], { unique: true })
@@ -57,6 +60,8 @@ export class User {
 
   @OneToMany(() => RatingUserMovie, (ratingUserMovie) => ratingUserMovie.user)
   ratingUserMovies: RatingUserMovie[];
+
+
 
   @OneToMany(
     () => StatusUserEpisode,

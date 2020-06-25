@@ -1,40 +1,40 @@
 import { Controller } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Movie } from "entities/movie.entity";
-import { MovieService } from "src/services/movie/movie.service";
+import { User } from "entities/user.entity";
+import { UserService } from "src/services/user/user.service";
 
-@Controller('api/movie')
+@Controller('api/user')
 @Crud({
     model: {
-        type: Movie
+        type: User
     },
     params: {
         id: {
-            field: 'movieId',
+            field: 'userId',
             type: 'number',
             primary: true
         }
     },
     query:{
         join:{
-            category:{
+            statusUserMovies:{
                 eager: true
             },
-            genre:{
-                eager: true
-            },
-            tagMovies:{
+            statusUserEpisodes:{
                 eager: true
             },
             ratingUserMovies:{
                 eager: true
             },
-            tag:{
+            ratingUserEpisodes:{
+                eager: true
+            },
+            episode:{
                 eager: true
             }
         }
     }
 })
-export class MovieController{
-    constructor(public service: MovieService){}
+export class UserController{
+    constructor(public service: UserService){}
 }
