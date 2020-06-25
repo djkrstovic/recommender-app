@@ -33,6 +33,7 @@ import { GenreController } from './controllers/api/genre.controller';
 import { GenreService } from './services/genre/genre.service';
 import { UserController } from './controllers/api/user.controller';
 import { UserService } from './services/user/user.service';
+import { AuthController } from './controllers/api/auth.controller';
 
 @Module({
   imports: [
@@ -69,6 +70,8 @@ import { UserService } from './services/user/user.service';
       Tag,
       Genre,
       User,
+      TagMovie,
+      TagEpisode,
     ])
 
   ],
@@ -82,6 +85,7 @@ import { UserService } from './services/user/user.service';
     TagController,
     GenreController,
     UserController,
+    AuthController,
   ],
   providers: [
     AppService,
@@ -93,6 +97,7 @@ import { UserService } from './services/user/user.service';
     TagService,
     GenreService,
     UserService,
+    TvSeriesService,
   ],
 })
 export class AppModule {}

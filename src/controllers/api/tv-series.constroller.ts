@@ -1,7 +1,8 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Body, Post } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { TvSeries } from "entities/tv-series.entity";
 import { TvSeriesService } from "src/services/tv-series/tv-series.service";
+import { AddTvSeriesDto } from "src/dtos/tv-series/add.tv-series.dto";
 
 @Controller('api/series')
 @Crud({
@@ -28,4 +29,8 @@ import { TvSeriesService } from "src/services/tv-series/tv-series.service";
 })
 export class TvSeriesController{
     constructor(public service: TvSeriesService){}
+    @Post('createFull') // http://localhost:3000/api/series/createFull/
+    createFullTvSeries(@Body() data: AddTvSeriesDto){
+        return this.service.createFullTvSeries(data);
+    }
 }

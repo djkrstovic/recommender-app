@@ -1,7 +1,8 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Post, Body } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Genre } from "entities/genre.entity";
 import { GenreService } from "src/services/genre/genre.service";
+import { AddGenreDto } from "src/dtos/genre/add.genre.dto";
 
 @Controller('api/genres')
 @Crud({
@@ -22,4 +23,9 @@ import { GenreService } from "src/services/genre/genre.service";
 })
 export class GenreController{
     constructor(public service: GenreService){}
+
+    @Post('createGenre') // http://localhost:3000/api/genres/createGenre/
+    createGenre(@Body() data: AddGenreDto){
+        return this.service.createGenre(data);
+    }
 }
