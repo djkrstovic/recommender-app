@@ -40,7 +40,6 @@ export class AdministratorService {
         // password => password_hash (SHA512)
         const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
-
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
 
         let newAdmin: Administrator = new Administrator();

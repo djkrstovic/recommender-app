@@ -118,6 +118,7 @@ import { PhotoTvSeriesService } from './services/photo-tv-series/photo-tv-series
     PhotoMovieService,
     PhotoEpisodeService,
     PhotoTvSeriesService,
+    UserService,
   ],
   exports:[
     AdministratorService,
