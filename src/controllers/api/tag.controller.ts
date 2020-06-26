@@ -1,6 +1,6 @@
 import { Controller, Body, Post } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Tag } from "entities/tag.entity";
+import { Tag } from "src/entities/tag.entity";
 import { TagService } from "src/services/tag/tag.service";
 import { AddTagDto } from "src/dtos/tag/add.tag.dto";
 

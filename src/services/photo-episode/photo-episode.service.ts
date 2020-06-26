@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { PhotoEpisode } from "entities/photo-episode.entity";
+import { PhotoEpisode } from "src/entities/photo-episode.entity";
 
 @Injectable()
 export class PhotoEpisodeService extends TypeOrmCrudService<PhotoEpisode>{

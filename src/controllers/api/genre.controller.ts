@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Genre } from "entities/genre.entity";
+import { Genre } from "src/entities/genre.entity";
 import { GenreService } from "src/services/genre/genre.service";
 import { AddGenreDto } from "src/dtos/genre/add.genre.dto";
 

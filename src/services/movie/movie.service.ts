@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
-import { Movie } from "entities/movie.entity";
+import { Movie } from "src/entities/movie.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { AddMovieDto } from "src/dtos/movie/add.movie.dto";
 import { ApiResponse } from "src/misc/api.response.class";
-import { TagMovie } from "entities/tag-movie.entity";
+import { TagMovie } from "src/entities/tag-movie.entity";
 
 @Injectable()
 export class MovieService extends TypeOrmCrudService<Movie>{

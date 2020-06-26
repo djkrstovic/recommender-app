@@ -1,13 +1,13 @@
 import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { TvSeries } from "entities/tv-series.entity";
+import { TvSeries } from "src/entities/tv-series.entity";
 import { TvSeriesService } from "src/services/tv-series/tv-series.service";
 import { AddTvSeriesDto } from "src/dtos/tv-series/add.tv-series.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { StorageConfig } from "config/storage.config";
 import { ApiResponse } from "src/misc/api.response.class";
-import { PhotoTvSeries } from "entities/photo-tv-series.entity";
+import { PhotoTvSeries } from "src/entities/photo-tv-series.entity";
 import { PhotoTvSeriesService } from "src/services/photo-tv-series/photo-tv-series.service";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
@@ -53,7 +53,7 @@ export class TvSeriesController{
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
-                destination: StorageConfig.photoDestinationTvSeries,
+                destination: StorageConfig.photoTvSeries.destination,
                 filename: (req, file, callback)=>{
                     // "neka slika.jpg" => 20202506-5644894568-neka-slika.jpg
                     let original: string = file.originalname;
@@ -99,7 +99,7 @@ export class TvSeriesController{
             },
             limits:{
                 files: 1,
-                fileSize: StorageConfig.photoMaxFileSize,
+                fileSize: StorageConfig.photoTvSeries.maxSize,
             }
     })
     )
@@ -136,8 +136,8 @@ export class TvSeriesController{
         }
 
         // Cuvanje resized fajla
-        await this.createThumb(photo);
-        await this.createSmallImage(photo);
+        await this.createResizedImage(photo, StorageConfig.photoTvSeries.resize.thumb)
+        await this.createResizedImage(photo, StorageConfig.photoTvSeries.resize.small)
 
         const newPhotoTvSeries: PhotoTvSeries = new PhotoTvSeries();
         newPhotoTvSeries.tvSeriesId = tvSeriesId;
@@ -152,36 +152,18 @@ export class TvSeriesController{
         return savedPhotoTvSeries;
     }
 
-    async createThumb(photo){
+    async createResizedImage(photo, resizeSettings){
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photoDestinationTvSeries + "thumb/" + fileName;
-
+        const destinationFilePath = StorageConfig.photoTvSeries.destination +
+                                    resizeSettings.directory +
+                                    fileName;
         await sharp(originalFilePath)
             .resize({
                 fit: 'cover', // contain uz background
-                width: StorageConfig.photoThumbSize.width,
-                height: StorageConfig.photoThumbSize.height,
-                /*background:{
-                    r: 255, g:255, b:255, alpha:0.0
-                }*/
-            })
-            .toFile(destinationFilePath);
-
-    }
-
-    async createSmallImage(photo){
-        const originalFilePath = photo.path;
-        const fileName = photo.filename;
-
-        const destinationFilePath = StorageConfig.photoDestinationTvSeries + "small/" + fileName;
-
-        await sharp(originalFilePath)
-            .resize({
-                fit: 'cover', // contain uz background
-                width: StorageConfig.photoSmallSize.width,
-                height: StorageConfig.photoSmallSize.height,
+                width: resizeSettings.width,
+                height: resizeSettings.height,
                 /*background:{
                     r: 255, g:255, b:255, alpha:0.0
                 }*/

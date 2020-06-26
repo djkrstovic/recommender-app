@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { TvSeries } from "entities/tv-series.entity";
+import { TvSeries } from "src/entities/tv-series.entity";
 import { AddTvSeriesDto } from "src/dtos/tv-series/add.tv-series.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 

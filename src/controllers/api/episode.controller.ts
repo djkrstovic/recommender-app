@@ -1,10 +1,10 @@
 import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Episode } from "entities/episode.entity";
+import { Episode } from "src/entities/episode.entity";
 import { EpisodeService } from "src/services/episode/episode.service";
 import { AddEpisodeDto } from "src/dtos/episode/add.episode.dto";
 import { ApiResponse } from "src/misc/api.response.class";
-import { PhotoEpisode } from "entities/photo-episode.entity";
+import { PhotoEpisode } from "src/entities/photo-episode.entity";
 import { PhotoEpisodeService } from "src/services/photo-episode/photo-episode.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
@@ -60,7 +60,7 @@ export class EpisodeController{
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
-                destination: StorageConfig.photoDestinationEpisode,
+                destination: StorageConfig.photoEpisode.destination,
                 filename: (req, file, callback)=>{
                     // "neka slika.jpg" => 20202506-5644894568-neka-slika.jpg
                     let original: string = file.originalname;
@@ -106,7 +106,7 @@ export class EpisodeController{
             },
             limits:{
                 files: 1,
-                fileSize: StorageConfig.photoMaxFileSize,
+                fileSize: StorageConfig.photoEpisode.maxSize,
             }
     })
     )
@@ -144,8 +144,8 @@ export class EpisodeController{
         }
 
         // Cuvanje resized fajla
-        await this.createThumb(photo);
-        await this.createSmallImage(photo);
+        await this.createResizedImage(photo, StorageConfig.photoEpisode.resize.thumb)
+        await this.createResizedImage(photo, StorageConfig.photoEpisode.resize.small)
 
         const newPhotoEpisode: PhotoEpisode = new PhotoEpisode();
         newPhotoEpisode.episodeId = episodeId;
@@ -160,36 +160,18 @@ export class EpisodeController{
         return savedPhotoEpisode;
     }
 
-    async createThumb(photo){
+    async createResizedImage(photo, resizeSettings){
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photoDestinationEpisode + "thumb/" + fileName;
-
+        const destinationFilePath = StorageConfig.photoEpisode.destination +
+                                    resizeSettings.directory +
+                                    fileName;
         await sharp(originalFilePath)
             .resize({
                 fit: 'cover', // contain uz background
-                width: StorageConfig.photoThumbSize.width,
-                height: StorageConfig.photoThumbSize.height,
-                /*background:{
-                    r: 255, g:255, b:255, alpha:0.0
-                }*/
-            })
-            .toFile(destinationFilePath);
-
-    }
-
-    async createSmallImage(photo){
-        const originalFilePath = photo.path;
-        const fileName = photo.filename;
-
-        const destinationFilePath = StorageConfig.photoDestinationEpisode + "small/" + fileName;
-
-        await sharp(originalFilePath)
-            .resize({
-                fit: 'cover', // contain uz background
-                width: StorageConfig.photoSmallSize.width,
-                height: StorageConfig.photoSmallSize.height,
+                width: resizeSettings.width,
+                height: resizeSettings.height,
                 /*background:{
                     r: 255, g:255, b:255, alpha:0.0
                 }*/

@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Movie } from "entities/movie.entity";
+import { Movie } from "src/entities/movie.entity";
 import { MovieService } from "src/services/movie/movie.service";
 import { AddMovieDto } from "src/dtos/movie/add.movie.dto";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from "multer";
 import { StorageConfig } from "config/storage.config";
 import { PhotoMovieService } from "src/services/photo-movie/photo-movie.service";
-import { PhotoMovie } from "entities/photo-movie.entity";
+import { PhotoMovie } from "src/entities/photo-movie.entity";
 import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
@@ -62,7 +62,7 @@ import * as sharp from 'sharp';
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
-                destination: StorageConfig.photoDestinationMovie,
+                destination: StorageConfig.photoMovie.destination,
                 filename: (req, file, callback)=>{
                     // "neka slika.jpg" => 20202506-5644894568-neka-slika.jpg
                     let original: string = file.originalname;
@@ -108,7 +108,7 @@ import * as sharp from 'sharp';
             },
             limits:{
                 files: 1,
-                fileSize: StorageConfig.photoMaxFileSize,
+                fileSize: StorageConfig.photoMovie.maxSize,
             }
     })
     )
@@ -145,8 +145,8 @@ import * as sharp from 'sharp';
         }
 
         // Cuvanje resized fajla
-        await this.createThumb(photo);
-        await this.createSmallImage(photo);
+        await this.createResizedImage(photo, StorageConfig.photoMovie.resize.thumb)
+        await this.createResizedImage(photo, StorageConfig.photoMovie.resize.small)
         
     
         // let imagePath = photo.filename; // u zapis u BP
@@ -165,36 +165,18 @@ import * as sharp from 'sharp';
         return savedPhotoMovie;
     }
 
-    async createThumb(photo){
+    async createResizedImage(photo, resizeSettings){
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photoDestinationMovie + "thumb/" + fileName;
-
+        const destinationFilePath = StorageConfig.photoMovie.destination +
+                                    resizeSettings.directory +
+                                    fileName;
         await sharp(originalFilePath)
             .resize({
                 fit: 'cover', // contain uz background
-                width: StorageConfig.photoThumbSize.width,
-                height: StorageConfig.photoThumbSize.height,
-                /*background:{
-                    r: 255, g:255, b:255, alpha:0.0
-                }*/
-            })
-            .toFile(destinationFilePath);
-
-    }
-
-    async createSmallImage(photo){
-        const originalFilePath = photo.path;
-        const fileName = photo.filename;
-
-        const destinationFilePath = StorageConfig.photoDestinationMovie + "small/" + fileName;
-
-        await sharp(originalFilePath)
-            .resize({
-                fit: 'cover', // contain uz background
-                width: StorageConfig.photoSmallSize.width,
-                height: StorageConfig.photoSmallSize.height,
+                width: resizeSettings.width,
+                height: resizeSettings.height,
                 /*background:{
                     r: 255, g:255, b:255, alpha:0.0
                 }*/

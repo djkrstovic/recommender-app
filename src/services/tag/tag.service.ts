@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Tag } from "entities/tag.entity";
+import { Tag } from "src/entities/tag.entity";
 import { AddTagDto } from "src/dtos/tag/add.tag.dto";
 import { ApiResponse } from "src/misc/api.response.class";
 
