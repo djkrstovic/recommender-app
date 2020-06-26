@@ -122,6 +122,7 @@ import { PhotoTvSeriesService } from './services/photo-tv-series/photo-tv-series
   ],
   exports:[
     AdministratorService,
+    UserService,
   ]
 })
 export class AppModule implements NestModule {
