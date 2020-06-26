@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { Genre } from "src/entities/genre.entity";
 import { AddGenreDto } from "src/dtos/genre/add.genre.dto";
 import { ApiResponse } from "src/misc/api.response.class";
+import { EditGenreDto } from "src/dtos/genre/edit.genre.dto copy";
 
 @Injectable()
 export class GenreService extends TypeOrmCrudService<Genre>{
@@ -27,4 +28,30 @@ export class GenreService extends TypeOrmCrudService<Genre>{
             ]
         })
     }
+
+    
+    async editFullGenre(genreId: number, data: EditGenreDto): Promise<ApiResponse | Genre>{
+        const existingGenre: Genre = await this.genre.findOne(genreId);
+        
+        if(!existingGenre){
+            return new ApiResponse('error', -5001, 'Genre not found.')
+        }
+
+        existingGenre.name = data.name;
+        
+        const savedGenre: Genre = await this.genre.save(existingGenre);
+
+        if(!savedGenre){
+            return new ApiResponse('error', -5001, 'Could not save new TV Series data.')
+        }
+
+        return await this.genre.findOne(genreId, {
+            relations: [
+                "movies",
+                "tvSeries"
+            ]
+        })
+
+    }
+
 }

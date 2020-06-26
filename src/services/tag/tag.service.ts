@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { Tag } from "src/entities/tag.entity";
 import { AddTagDto } from "src/dtos/tag/add.tag.dto";
 import { ApiResponse } from "src/misc/api.response.class";
+import { EditTagDto } from "src/dtos/tag/edit.tag.dto copy";
 
 @Injectable()
 export class TagService extends TypeOrmCrudService<Tag>{
@@ -26,5 +27,29 @@ export class TagService extends TypeOrmCrudService<Tag>{
                 "tagMovies"
             ]
         })
+    }
+
+    async editFullTag(tagId: number, data: EditTagDto): Promise<ApiResponse | Tag>{
+        const existingTag: Tag = await this.tag.findOne(tagId);
+        
+        if(!existingTag){
+            return new ApiResponse('error', -5001, 'Tag not found.')
+        }
+
+        existingTag.tagName = data.tagName;
+        
+        const savedTag: Tag = await this.tag.save(existingTag);
+
+        if(!savedTag){
+            return new ApiResponse('error', -5001, 'Could not save new TV Series data.')
+        }
+
+        return await this.tag.findOne(tagId, {
+            relations: [
+                "tagEpisodes",
+                "tagMovies"
+            ]
+        })
+
     }
 }

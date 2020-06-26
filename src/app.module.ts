@@ -24,7 +24,7 @@ import { MovieService } from './services/movie/movie.service';
 import { EpisodeController } from './controllers/api/episode.controller';
 import { EpisodeService } from './services/episode/episode.service';
 import { TvSeriesService } from './services/tv-series/tv-series.service';
-import { TvSeriesController } from './controllers/api/tv-series.constroller';
+import { TvSeriesController } from './controllers/api/tv-series.controller';
 import { CategoryController } from './controllers/api/category.controller';
 import { CategoryService } from './services/category/category.service';
 import { TagController } from './controllers/api/tag.controller';
