@@ -42,6 +42,9 @@ import * as sharp from 'sharp';
             ratingUserMovies:{
                 eager: true
             },
+            statusUserMovies:{
+                eager: false
+            },
             tag:{
                 eager: true
             }

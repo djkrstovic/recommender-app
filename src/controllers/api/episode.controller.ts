@@ -36,6 +36,9 @@ import * as sharp from 'sharp';
             ratingUserEpisodes:{
                 eager: true
             },
+            statusUserEpisodes:{
+                eager: false
+            },
             tagEpisodes:{
                 eager: true
             },

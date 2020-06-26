@@ -18,6 +18,12 @@ import { AddGenreDto } from "src/dtos/genre/add.genre.dto";
     },
     query:{
         join:{
+            movies:{
+                eager: true
+            },
+            tvSeries:{
+                eager: true
+            }
         }
     }
 })

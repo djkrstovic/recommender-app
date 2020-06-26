@@ -20,7 +20,7 @@ import * as sharp from 'sharp';
     },
     params: {
         id: {
-            field: 'episodeId',
+            field: 'tvSeriesId',
             type: 'number',
             primary: true
         }
