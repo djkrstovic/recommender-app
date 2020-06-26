@@ -1,4 +1,4 @@
-import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req } from "@nestjs/common";
+import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req, Delete } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { TvSeries } from "src/entities/tv-series.entity";
 import { TvSeriesService } from "src/services/tv-series/tv-series.service";
@@ -170,4 +170,42 @@ export class TvSeriesController{
             })
             .toFile(destinationFilePath);
     }
+
+    @Delete(':tvSeriesId/deletePhoto/:photoTvSeriesId') // http://localhost:3000/api/series/2/deletePhoto/4/
+    public async deletePhoto(
+        @Param('tvSeriesId') tvSeriesId: number,
+        @Param('photoTvSeriesId') photoTvSeriesId: number,
+    ){
+        const photo = await this.photoTvSeriesService.findOne({
+            tvSeriesId: tvSeriesId,
+            photoTvSeriesId: photoTvSeriesId
+        });
+
+        if(!photo){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        try {
+            fs.unlinkSync(StorageConfig.photoTvSeries.destination + photo.imagePath);
+            fs.unlinkSync(StorageConfig.photoTvSeries.destination +
+                        StorageConfig.photoTvSeries.resize.thumb.directory +
+                        photo.imagePath);
+            fs.unlinkSync(StorageConfig.photoTvSeries.destination +
+                        StorageConfig.photoTvSeries.resize.small.directory +
+                        photo.imagePath);
+        } catch (error) {
+            
+        }
+
+        
+
+        const deleteResult = await this.photoTvSeriesService.deleteById(photoTvSeriesId);
+        if(deleteResult.affected === 0){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        return new ApiResponse('ok', 0, 'One photo deleted!');
+
+    }
+
 }

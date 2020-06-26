@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Movie } from "src/entities/movie.entity";
 import { MovieService } from "src/services/movie/movie.service";
@@ -186,5 +186,42 @@ import * as sharp from 'sharp';
             })
             .toFile(destinationFilePath);
     }
+    @Delete(':movieId/deletePhoto/:photoMovieId') // http://localhost:3000/api/movie/1/deletePhoto/5/
+    public async deletePhoto(
+        @Param('movieId') movieId: number,
+        @Param('photoMovieId') photoMovieId: number,
+    ){
+        const photo = await this.photoMovieService.findOne({
+            movieId: movieId,
+            photoMovieId: photoMovieId
+        });
+
+        if(!photo){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        try {
+            fs.unlinkSync(StorageConfig.photoMovie.destination + photo.imagePath);
+            fs.unlinkSync(StorageConfig.photoMovie.destination +
+                        StorageConfig.photoMovie.resize.thumb.directory +
+                        photo.imagePath);
+            fs.unlinkSync(StorageConfig.photoMovie.destination +
+                        StorageConfig.photoMovie.resize.small.directory +
+                        photo.imagePath);
+        } catch (error) {
+            
+        }
+
+        
+
+        const deleteResult = await this.photoMovieService.deleteById(photoMovieId);
+        if(deleteResult.affected === 0){
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
+
+        return new ApiResponse('ok', 0, 'One photo deleted!');
+
+    }
+
 
 }

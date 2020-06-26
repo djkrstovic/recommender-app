@@ -13,4 +13,7 @@ export class PhotoMovieService extends TypeOrmCrudService<PhotoMovie>{
     add(newPhotoMovie:PhotoMovie): Promise<PhotoMovie>{
         return this.photoMovie.save(newPhotoMovie);
     }
+    async deleteById(id: number){
+        return await this.photoMovie.delete(id);
+    }
 }
