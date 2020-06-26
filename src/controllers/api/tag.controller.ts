@@ -18,6 +18,12 @@ import { AddTagDto } from "src/dtos/tag/add.tag.dto";
     },
     query:{
         join:{
+            tagEpisodes:{
+                eager: true
+            },
+            tagMovies:{
+                eager: true
+            }
         }
     }
 })

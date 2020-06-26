@@ -19,9 +19,6 @@ export class TvSeries {
   @PrimaryGeneratedColumn({ type: "int", name: "tv_series_id", unsigned: true })
   tvSeriesId: number;
 
-  @Column({ name: "image_path", nullable: true, length: 128 })
-  imagePath: string | null;
-
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
   titleSrb: string | null;
 
