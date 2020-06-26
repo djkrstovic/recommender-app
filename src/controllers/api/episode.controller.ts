@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UploadedFile, Param, UseInterceptors } from "@nestjs/common";
+import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Episode } from "entities/episode.entity";
 import { EpisodeService } from "src/services/episode/episode.service";
@@ -88,12 +88,14 @@ export class EpisodeController{
             fileFilter:(req, file, callback)=>{
                 //1. provera extenzije: JPG, PNG
                 if(!file.originalname.match(/\.(jpg|png)$/)){
-                    callback(new Error('Bad file extension!'), false);
+                    req.fileFilterError = 'Bad file extension!';
+                    callback(null, false);
                     return;
                 } 
                 //2. provera tipa sadrzaja: image/jpeg, image/png (mimetype)
                 if(!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
-                    callback(new Error('Bad file extension!'), false);
+                    req.fileFilterError = 'Bad file content!';
+                    callback(null, false);
                     return;
                 }
 
@@ -106,8 +108,20 @@ export class EpisodeController{
     })
     )
 
-    async uploadPhoto(@Param('id') episodeId: number, @UploadedFile() photo): Promise<ApiResponse | PhotoEpisode>{
+    async uploadPhoto(
+        @Param('id') episodeId: number,
+        @UploadedFile() photo,
+        @Req() req
+        ): Promise<ApiResponse | PhotoEpisode>{
         // let imagePath = photo.filename; // u zapis u BP
+
+        if(req.fileFilterError){
+            return new ApiResponse('error', -4002, req.fileFilterError);
+        }
+
+        if(!photo){
+            return new ApiResponse('error', -4002, 'File not uploaded!');
+        }
 
         const newPhotoEpisode: PhotoEpisode = new PhotoEpisode();
         newPhotoEpisode.episodeId = episodeId;
