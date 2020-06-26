@@ -59,7 +59,7 @@ import { ApiResponse } from "src/misc/api.response.class";
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
-                destination: StorageConfig.photoDestination,
+                destination: StorageConfig.photoDestinationMovie,
                 filename: (req, file, callback)=>{
                     // "neka slika.jpg" => 20202506-5644894568-neka-slika.jpg
                     let original: string = file.originalname;

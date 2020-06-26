@@ -39,6 +39,8 @@ import { PhotoMovie } from 'entities/photo-movie.entity';
 import { PhotoEpisode } from 'entities/photo-episode.entity';
 import { PhotoTvSeries } from 'entities/photo-tv-series.entity';
 import { PhotoMovieService } from './services/photo-movie/photo-movie.service';
+import { PhotoEpisodeService } from './services/photo-episode/photo-episode.service';
+import { PhotoTvSeriesService } from './services/photo-tv-series/photo-tv-series.service';
 
 @Module({
   imports: [
@@ -114,7 +116,8 @@ import { PhotoMovieService } from './services/photo-movie/photo-movie.service';
     UserService,
     TvSeriesService,
     PhotoMovieService,
-
+    PhotoEpisodeService,
+    PhotoTvSeriesService,
   ],
   exports:[
     AdministratorService,
