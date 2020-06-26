@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Movie } from "entities/movie.entity";
 import { MovieService } from "src/services/movie/movie.service";
@@ -90,12 +90,14 @@ import { ApiResponse } from "src/misc/api.response.class";
             fileFilter:(req, file, callback)=>{
                 //1. provera extenzije: JPG, PNG
                 if(!file.originalname.match(/\.(jpg|png)$/)){
-                    callback(new Error('Bad file extension!'), false);
+                    req.fileFilterError = 'Bad file extension!';
+                    callback(null, false);
                     return;
                 } 
                 //2. provera tipa sadrzaja: image/jpeg, image/png (mimetype)
                 if(!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
-                    callback(new Error('Bad file extension!'), false);
+                    req.fileFilterError = 'Bad file content!';
+                    callback(null, false);
                     return;
                 }
 
@@ -103,11 +105,24 @@ import { ApiResponse } from "src/misc/api.response.class";
             },
             limits:{
                 files: 1,
-                fieldSize: StorageConfig.photoMaxFileSize,
+                fileSize: StorageConfig.photoMaxFileSize,
             }
     })
     )
-    async uploadPhoto(@Param('id') movieId: number, @UploadedFile() photo): Promise<ApiResponse | PhotoMovie>{
+    async uploadPhoto(
+        @Param('id') movieId: number,
+        @UploadedFile() photo,
+        @Req() req
+        ): Promise<ApiResponse | PhotoMovie>{
+
+        if(req.fileFilterError){
+            return new ApiResponse('error', -4002, req.fileFilterError);
+        }
+
+        if(!photo){
+            return new ApiResponse('error', -4002, 'File not uploaded!');
+        }
+    
         // let imagePath = photo.filename; // u zapis u BP
 
         const newPhotoMovie: PhotoMovie = new PhotoMovie();
@@ -117,6 +132,7 @@ import { ApiResponse } from "src/misc/api.response.class";
         const savedPhotoMovie = await this.photoMovieService.add(newPhotoMovie);
 
         if(!savedPhotoMovie){
+            
             return new ApiResponse('error', -4001);
         }
 

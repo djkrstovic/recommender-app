@@ -94,7 +94,7 @@ export class TvSeriesController{
             },
             limits:{
                 files: 1,
-                fieldSize: StorageConfig.photoMaxFileSize,
+                fileSize: StorageConfig.photoMaxFileSize,
             }
     })
     )
