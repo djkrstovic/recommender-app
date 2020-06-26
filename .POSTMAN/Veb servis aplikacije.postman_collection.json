@@ -1115,6 +1115,85 @@
 							"body": "{\n    \"movieId\": 2,\n    \"titleSrb\": \"Zlocesti djed\",\n    \"titleEng\": \"Dirty Grandpa\",\n    \"director\": \"Dan Mazerc\",\n    \"synopsis\": \"Right before his wedding, an uptight guy is tricked into driving his grandfather, a lecherous former Army Lieutenant Colonel, to Florida for Spring Break.\",\n    \"categoryId\": 1,\n    \"genreId\": 3,\n    \"photoMovies\": [],\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Movie\"\n    },\n    \"genre\": {\n        \"genreId\": 3,\n        \"name\": \"Thriller\"\n    },\n    \"tagMovies\": [\n        {\n            \"tagMoviesId\": 4,\n            \"movieId\": 2,\n            \"tagId\": 3\n        },\n        {\n            \"tagMoviesId\": 5,\n            \"movieId\": 2,\n            \"tagId\": 4\n        },\n        {\n            \"tagMoviesId\": 6,\n            \"movieId\": 2,\n            \"tagId\": 6\n        }\n    ],\n    \"ratingUserMovies\": [],\n    \"tag\": [\n        {\n            \"tagId\": 3,\n            \"tagName\": \"Dramatic\"\n        },\n        {\n            \"tagId\": 4,\n            \"tagName\": \"Fun\"\n        },\n        {\n            \"tagId\": 6,\n            \"tagName\": \"Touching\"\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "Delete a single movie photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movie/1/deletePhoto/5/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movie",
+								"1",
+								"deletePhoto",
+								"5",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete a single movie photo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/movie/1/deletePhoto/5/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movie",
+										"1",
+										"deletePhoto",
+										"5",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-Q26RqCz+c6/EysRdjQ0jCBs+2c4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 Jun 2020 16:42:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"errorCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
+						}
+					]
 				}
 			],
 			"auth": {
@@ -1712,6 +1791,85 @@
 							"body": "{\n    \"tvSeriesId\": 2,\n    \"titleSrb\": \"Crno ogledalo\",\n    \"titleEng\": \"Black Mirror\",\n    \"director\": \"Charlie Brooker\",\n    \"synopsis\": \"An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.\",\n    \"categoryId\": 2,\n    \"genreId\": 4,\n    \"photoTvSeries\": [\n        {\n            \"photoTvSeriesId\": 4,\n            \"tvSeriesId\": 2,\n            \"imagePath\": \"2020626-2272821690-15958989855accee86a9c5d863544897_orig.jpg\"\n        },\n        {\n            \"photoTvSeriesId\": 5,\n            \"tvSeriesId\": 2,\n            \"imagePath\": \"2020626-2812822132-8eb0ccbd8f63c49d39aac1e34ea7b1c9.jpg\"\n        }\n    ],\n    \"category\": {\n        \"categoryId\": 2,\n        \"name\": \"TV Series\"\n    },\n    \"genre\": {\n        \"genreId\": 4,\n        \"name\": \"Crime\"\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "Delete a single tv series photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/series/2/deletePhoto/5/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"series",
+								"2",
+								"deletePhoto",
+								"5",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete a single tv series photo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/series/2/deletePhoto/5/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"series",
+										"2",
+										"deletePhoto",
+										"5",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-Q26RqCz+c6/EysRdjQ0jCBs+2c4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 Jun 2020 16:56:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"errorCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
+						}
+					]
 				}
 			],
 			"auth": {
@@ -2307,6 +2465,139 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"episodeId\": 15,\n    \"titleSrb\": \"Vojvoda Snow\",\n    \"titleEng\": \"Lord Snow\",\n    \"synopsis\": \"Jon begins his training with the Night's Watch; Ned confronts his past and future at King's Landing; Daenerys finds herself at odds with Viserys.\",\n    \"season\": 1,\n    \"seasonEpisode\": 3,\n    \"tvSeriesId\": 1,\n    \"photoEpisodes\": [\n        {\n            \"photoEpisodeId\": 2,\n            \"episodeId\": 15,\n            \"imagePath\": \"2020626-5236847363-land-rover-35a.jpg\"\n        }\n    ],\n    \"tvSeries\": {\n        \"tvSeriesId\": 1,\n        \"titleSrb\": \"Igra prestola\",\n        \"titleEng\": \"Game of Thrones \",\n        \"director\": \"David Benioff\",\n        \"synopsis\": \"Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.\",\n        \"categoryId\": 2,\n        \"genreId\": 2\n    },\n    \"ratingUserEpisodes\": [],\n    \"tagEpisodes\": [\n        {\n            \"tagEpisodeId\": 26,\n            \"episodeId\": 15,\n            \"tagId\": 7\n        },\n        {\n            \"tagEpisodeId\": 27,\n            \"episodeId\": 15,\n            \"tagId\": 8\n        },\n        {\n            \"tagEpisodeId\": 28,\n            \"episodeId\": 15,\n            \"tagId\": 9\n        }\n    ],\n    \"tag\": [\n        {\n            \"tagId\": 7,\n            \"tagName\": \"Mysterious\"\n        },\n        {\n            \"tagId\": 8,\n            \"tagName\": \"Scary\"\n        },\n        {\n            \"tagId\": 9,\n            \"tagName\": \"Shocking\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a single episode photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/episode/6/deletePhoto/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"episode",
+								"6",
+								"deletePhoto",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete a single tv series photo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/series/2/deletePhoto/5/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"series",
+										"2",
+										"deletePhoto",
+										"5",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-Q26RqCz+c6/EysRdjQ0jCBs+2c4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 Jun 2020 16:56:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"errorCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
+						},
+						{
+							"name": "Delete a single episode photo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/episode/15/deletePhoto/2/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"episode",
+										"15",
+										"deletePhoto",
+										"2",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-Q26RqCz+c6/EysRdjQ0jCBs+2c4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 26 Jun 2020 16:57:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"errorCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
 						}
 					]
 				}
