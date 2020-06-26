@@ -11,6 +11,7 @@ import { PhotoMovie } from "entities/photo-movie.entity";
 import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
+import * as sharp from 'sharp';
 
 @Controller('api/movie')
 @Crud({
@@ -142,6 +143,11 @@ import * as fs from 'fs';
             return new ApiResponse('error', -4002, 'Bad file content type!');
 
         }
+
+        // Cuvanje resized fajla
+        await this.createThumb(photo);
+        await this.createSmallImage(photo);
+        
     
         // let imagePath = photo.filename; // u zapis u BP
 
@@ -159,6 +165,41 @@ import * as fs from 'fs';
         return savedPhotoMovie;
     }
 
-    
+    async createThumb(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationMovie + "thumb/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoThumbSize.width,
+                height: StorageConfig.photoThumbSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
+
+    }
+
+    async createSmallImage(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationMovie + "small/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoSmallSize.width,
+                height: StorageConfig.photoSmallSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
+    }
 
 }

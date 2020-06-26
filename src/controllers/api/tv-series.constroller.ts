@@ -11,6 +11,7 @@ import { PhotoTvSeries } from "entities/photo-tv-series.entity";
 import { PhotoTvSeriesService } from "src/services/photo-tv-series/photo-tv-series.service";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
+import * as sharp from 'sharp';
 
 @Controller('api/series')
 @Crud({
@@ -134,6 +135,10 @@ export class TvSeriesController{
 
         }
 
+        // Cuvanje resized fajla
+        await this.createThumb(photo);
+        await this.createSmallImage(photo);
+
         const newPhotoTvSeries: PhotoTvSeries = new PhotoTvSeries();
         newPhotoTvSeries.tvSeriesId = tvSeriesId;
         newPhotoTvSeries.imagePath = photo.filename;
@@ -145,5 +150,42 @@ export class TvSeriesController{
         }
 
         return savedPhotoTvSeries;
+    }
+
+    async createThumb(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationTvSeries + "thumb/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoThumbSize.width,
+                height: StorageConfig.photoThumbSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
+
+    }
+
+    async createSmallImage(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationTvSeries + "small/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoSmallSize.width,
+                height: StorageConfig.photoSmallSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
     }
 }

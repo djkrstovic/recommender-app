@@ -11,6 +11,7 @@ import { diskStorage } from "multer";
 import { StorageConfig } from "config/storage.config";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
+import * as sharp from 'sharp';
 
 @Controller('api/episode')
 @Crud({
@@ -142,6 +143,10 @@ export class EpisodeController{
 
         }
 
+        // Cuvanje resized fajla
+        await this.createThumb(photo);
+        await this.createSmallImage(photo);
+
         const newPhotoEpisode: PhotoEpisode = new PhotoEpisode();
         newPhotoEpisode.episodeId = episodeId;
         newPhotoEpisode.imagePath = photo.filename;
@@ -153,5 +158,42 @@ export class EpisodeController{
         }
 
         return savedPhotoEpisode;
+    }
+
+    async createThumb(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationEpisode + "thumb/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoThumbSize.width,
+                height: StorageConfig.photoThumbSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
+
+    }
+
+    async createSmallImage(photo){
+        const originalFilePath = photo.path;
+        const fileName = photo.filename;
+
+        const destinationFilePath = StorageConfig.photoDestinationEpisode + "small/" + fileName;
+
+        await sharp(originalFilePath)
+            .resize({
+                fit: 'cover', // contain uz background
+                width: StorageConfig.photoSmallSize.width,
+                height: StorageConfig.photoSmallSize.height,
+                /*background:{
+                    r: 255, g:255, b:255, alpha:0.0
+                }*/
+            })
+            .toFile(destinationFilePath);
     }
 }
