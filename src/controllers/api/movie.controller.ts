@@ -6,6 +6,9 @@ import { AddMovieDto } from "src/dtos/movie/add.movie.dto";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from "multer";
 import { StorageConfig } from "config/storage.config";
+import { PhotoMovieService } from "src/services/photo-movie/photo-movie.service";
+import { PhotoMovie } from "entities/photo-movie.entity";
+import { ApiResponse } from "src/misc/api.response.class";
 
 @Controller('api/movie')
 @Crud({
@@ -21,6 +24,9 @@ import { StorageConfig } from "config/storage.config";
     },
     query:{
         join:{
+            photoMovies:{
+                eager: true
+            },
             category:{
                 eager: true
             },
@@ -40,7 +46,10 @@ import { StorageConfig } from "config/storage.config";
     }
 })
     export class MovieController{
-    constructor(public service: MovieService){}
+    constructor(
+        public service: MovieService,
+        public photoMovieService: PhotoMovieService,
+        ){}
 
     @Post('createFull') // http://localhost:3000/api/movie/createFull/
     createFullMovie(@Body() data: AddMovieDto){
@@ -50,17 +59,18 @@ import { StorageConfig } from "config/storage.config";
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
-                destination: StorageConfig.photos,
+                destination: StorageConfig.photoDestination,
                 filename: (req, file, callback)=>{
                     // "neka slika.jpg" => 20202506-5644894568-neka-slika.jpg
                     let original: string = file.originalname;
 
-                    let normalized = original.replace(/\s+/g, '-')
+                    let normalized = original.replace(/\s+/g, '-');
+                    normalized = normalized.replace(/[^A-z0-9\.\-],/g, '');
                     let sada = new Date();
                     let datePart = '';
-                    datePart += sada.getFullYear().toString;
-                    datePart += (sada.getMonth() + 1).toString; // jer meseci krecu od 0 do 11, a ovim se resava od 1 do 12
-                    datePart += sada.getDate().toString;
+                    datePart += sada.getFullYear().toString();
+                    datePart += (sada.getMonth() + 1).toString(); // jer meseci krecu od 0 do 11, a ovim se resava od 1 do 12
+                    datePart += sada.getDate().toString();
                     
                     let randomPart: string =
                     new Array(10)
@@ -70,14 +80,47 @@ import { StorageConfig } from "config/storage.config";
                     
                     let fileName = datePart + '-' + randomPart + '-' + normalized;
 
+                    fileName = fileName.toLocaleLowerCase();
+
                     callback(null, fileName);
 
                 }
-            })
-        })
+            }),
+
+            fileFilter:(req, file, callback)=>{
+                //1. provera extenzije: JPG, PNG
+                if(!file.originalname.match(/\.(jpg|png)$/)){
+                    callback(new Error('Bad file extension!'), false);
+                    return;
+                } 
+                //2. provera tipa sadrzaja: image/jpeg, image/png (mimetype)
+                if(!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
+                    callback(new Error('Bad file extension!'), false);
+                    return;
+                }
+
+                callback(null, true);
+            },
+            limits:{
+                files: 1,
+                fieldSize: StorageConfig.photoMaxFileSize,
+            }
+    })
     )
-    uploadPhoto(@Param('id') movieId: number, @UploadedFile() photo){
-        let imagePath = photo.filename; // u zapis u BP
+    async uploadPhoto(@Param('id') movieId: number, @UploadedFile() photo): Promise<ApiResponse | PhotoMovie>{
+        // let imagePath = photo.filename; // u zapis u BP
+
+        const newPhotoMovie: PhotoMovie = new PhotoMovie();
+        newPhotoMovie.movieId = movieId;
+        newPhotoMovie.imagePath = photo.filename;
+
+        const savedPhotoMovie = await this.photoMovieService.add(newPhotoMovie);
+
+        if(!savedPhotoMovie){
+            return new ApiResponse('error', -4001);
+        }
+
+        return savedPhotoMovie;
     }
 
 }

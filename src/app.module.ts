@@ -38,6 +38,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoMovie } from 'entities/photo-movie.entity';
 import { PhotoEpisode } from 'entities/photo-episode.entity';
 import { PhotoTvSeries } from 'entities/photo-tv-series.entity';
+import { PhotoMovieService } from './services/photo-movie/photo-movie.service';
 
 @Module({
   imports: [
@@ -69,16 +70,23 @@ import { PhotoTvSeries } from 'entities/photo-tv-series.entity';
        ]
     }),
     TypeOrmModule.forFeature([
-      Administrator,
-      Movie,
-      Episode,
-      TvSeries,
-      Category,
-      Tag,
-      Genre,
-      User,
-      TagMovie,
-      TagEpisode,
+        Administrator,
+        Category,
+        Episode,
+        Genre,
+        Movie,
+        RatingUserEpisode,
+        RatingUserMovie,
+        StatusUserEpisode,
+        StatusUserMovie,
+        TagMovie,
+        TagEpisode,
+        Tag,
+        TvSeries,
+        User,
+        PhotoMovie,
+        PhotoEpisode,
+        PhotoTvSeries,
     ])
 
   ],
@@ -105,6 +113,8 @@ import { PhotoTvSeries } from 'entities/photo-tv-series.entity';
     GenreService,
     UserService,
     TvSeriesService,
+    PhotoMovieService,
+
   ],
   exports:[
     AdministratorService,

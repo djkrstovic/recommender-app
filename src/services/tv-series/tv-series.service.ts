@@ -20,7 +20,6 @@ export class TvSeriesService extends TypeOrmCrudService<TvSeries>{
         newTvSeries.titleEng = data.titleEng;
         newTvSeries.director = data.director;
         newTvSeries.synopsis = data.synopsis;
-        newTvSeries.imagePath = data.imagePath;
         newTvSeries.categoryId = data.categoryId;
         newTvSeries.genreId    = data.genreId;
 

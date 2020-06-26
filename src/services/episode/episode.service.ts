@@ -22,7 +22,6 @@ export class EpisodeService extends TypeOrmCrudService<Episode>{
         newEpisode.titleSrb = data.titleSrb;
         newEpisode.titleEng = data.titleEng;
         newEpisode.synopsis = data.synopsis;
-        newEpisode.imagePath = data.imagePath;
         newEpisode.season = data.season;
         newEpisode.seasonEpisode = data.seasonEpisode;
         newEpisode.tvSeriesId = data.tvSeriesId;

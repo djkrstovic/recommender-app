@@ -24,7 +24,6 @@ export class MovieService extends TypeOrmCrudService<Movie>{
         newMovie.titleEng = data.titleEng;
         newMovie.director = data.director;
         newMovie.synopsis = data.synopsis;
-        newMovie.imagePath = data.imagePath;
         newMovie.categoryId = data.categoryId;
         newMovie.genreId    = data.genreId;
 
