@@ -1,4 +1,4 @@
-import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
+import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { TvSeries } from "src/entities/tv-series.entity";
 import { TvSeriesService } from "src/services/tv-series/tv-series.service";
@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditTvSeriesDto } from "src/dtos/tv-series/edit.tv-series.dto copy";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 
 @Controller('api/series')
 @Crud({
@@ -49,16 +51,22 @@ export class TvSeriesController{
         public photoTvSeriesService: PhotoTvSeriesService,
     ){}
     @Post('createFull') // http://localhost:3000/api/series/createFull/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     createFullTvSeries(@Body() data: AddTvSeriesDto){
         return this.service.createFullTvSeries(data);
     }
 
     @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     editFullTvSeries(@Param('id') id: number, @Body() data: EditTvSeriesDto){
         return this.service.editFullTvSeries(id, data);
     }
 
     @Post(':id/upload-photo/') // http://localhost:3000/api/series/:id/upload-photo/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
@@ -181,6 +189,8 @@ export class TvSeriesController{
     }
 
     @Delete(':tvSeriesId/deletePhoto/:photoTvSeriesId') // http://localhost:3000/api/series/2/deletePhoto/4/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     public async deletePhoto(
         @Param('tvSeriesId') tvSeriesId: number,
         @Param('photoTvSeriesId') photoTvSeriesId: number,

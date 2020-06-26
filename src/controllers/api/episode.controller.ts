@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req, Delete, Patch } from "@nestjs/common";
+import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Episode } from "src/entities/episode.entity";
 import { EpisodeService } from "src/services/episode/episode.service";
@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditEpisodeDto } from "src/dtos/episode/edit.episode.dto copy";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 
 @Controller('api/episode')
 @Crud({
@@ -58,16 +60,22 @@ export class EpisodeController{
         public photoEpisodeService: PhotoEpisodeService,
         ){}
     @Post('createFull') // http://localhost:3000/api/episode/createFull/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     createFullEpisode(@Body() data: AddEpisodeDto){
         return this.service.createFullEpisode(data);
     }
 
     @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     editFullEpisode(@Param('id') id: number, @Body() data: EditEpisodeDto){
         return this.service.editFullEpisode(id, data);
     }
     
     @Post(':id/upload-photo/') // http://localhost:3000/api/episode/:id/upload-photo/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
@@ -192,6 +200,8 @@ export class EpisodeController{
 
 
     @Delete(':episodeId/deletePhoto/:photoEpisodeId') // http://localhost:3000/api/episode/1/deletePhoto/5/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     public async deletePhoto(
         @Param('episodeId') episodeId: number,
         @Param('photoEpisodeId') photoEpisodeId: number,

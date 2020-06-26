@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Movie } from "src/entities/movie.entity";
 import { MovieService } from "src/services/movie/movie.service";
@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditMovieDto } from "src/dtos/movie/edit.movie.dto";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
 
 @Controller('api/movie')
 @Crud({
@@ -62,16 +64,22 @@ import { EditMovieDto } from "src/dtos/movie/edit.movie.dto";
         ){}
 
     @Post('createFull') // http://localhost:3000/api/movie/2/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     createFullMovie(@Body() data: AddMovieDto){
         return this.service.createFullMovie(data);
     }
 
     @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     editFullMovie(@Param('id') id: number, @Body() data: EditMovieDto){
         return this.service.editFullMovie(id, data);
     }
 
     @Post(':id/upload-photo/') // http://localhost:3000/api/movie/:id/upload-photo/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo',{
             storage: diskStorage({
@@ -197,6 +205,8 @@ import { EditMovieDto } from "src/dtos/movie/edit.movie.dto";
             .toFile(destinationFilePath);
     }
     @Delete(':movieId/deletePhoto/:photoMovieId') // http://localhost:3000/api/movie/1/deletePhoto/5/
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     public async deletePhoto(
         @Param('movieId') movieId: number,
         @Param('photoMovieId') photoMovieId: number,
