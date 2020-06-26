@@ -1,4 +1,4 @@
-import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req, Delete } from "@nestjs/common";
+import { Controller, Body, Post, UseInterceptors, Param, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { TvSeries } from "src/entities/tv-series.entity";
 import { TvSeriesService } from "src/services/tv-series/tv-series.service";
@@ -12,6 +12,7 @@ import { PhotoTvSeriesService } from "src/services/photo-tv-series/photo-tv-seri
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditTvSeriesDto } from "src/dtos/tv-series/edit.tv-series.dto copy";
 
 @Controller('api/series')
 @Crud({
@@ -37,6 +38,9 @@ import * as sharp from 'sharp';
                 eager: true
             }
         }
+    },
+    routes:{
+        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
     }
 })
 export class TvSeriesController{
@@ -47,6 +51,11 @@ export class TvSeriesController{
     @Post('createFull') // http://localhost:3000/api/series/createFull/
     createFullTvSeries(@Body() data: AddTvSeriesDto){
         return this.service.createFullTvSeries(data);
+    }
+
+    @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    editFullTvSeries(@Param('id') id: number, @Body() data: EditTvSeriesDto){
+        return this.service.editFullTvSeries(id, data);
     }
 
     @Post(':id/upload-photo/') // http://localhost:3000/api/series/:id/upload-photo/

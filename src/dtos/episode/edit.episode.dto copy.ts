@@ -1,12 +1,12 @@
-export class AddMovieDto {
+export class EditEpisodeDto {
     titleSrb    : string;
     titleEng    : string;
-    director    : string;
     synopsis    : string;
-    categoryId  : number;
-    genreId     : number;
+    season      : number;
+    seasonEpisode: number;
+    tvSeriesId    : number;
     tags        : {
         tagId: number;
-    }[] | null;
+    }[];
 }
 

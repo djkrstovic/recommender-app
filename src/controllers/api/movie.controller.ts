@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Movie } from "src/entities/movie.entity";
 import { MovieService } from "src/services/movie/movie.service";
@@ -12,6 +12,7 @@ import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditMovieDto } from "src/dtos/movie/edit.movie.dto";
 
 @Controller('api/movie')
 @Crud({
@@ -49,6 +50,9 @@ import * as sharp from 'sharp';
                 eager: true
             }
         }
+    },
+    routes:{
+        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
     }
 })
     export class MovieController{
@@ -57,10 +61,16 @@ import * as sharp from 'sharp';
         public photoMovieService: PhotoMovieService,
         ){}
 
-    @Post('createFull') // http://localhost:3000/api/movie/createFull/
+    @Post('createFull') // http://localhost:3000/api/movie/2/
     createFullMovie(@Body() data: AddMovieDto){
         return this.service.createFullMovie(data);
     }
+
+    @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    editFullMovie(@Param('id') id: number, @Body() data: EditMovieDto){
+        return this.service.editFullMovie(id, data);
+    }
+
     @Post(':id/upload-photo/') // http://localhost:3000/api/movie/:id/upload-photo/
     @UseInterceptors(
         FileInterceptor('photo',{
@@ -222,6 +232,8 @@ import * as sharp from 'sharp';
         return new ApiResponse('ok', 0, 'One photo deleted!');
 
     }
+
+    
 
 
 }

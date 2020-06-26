@@ -5,6 +5,7 @@ import { Repository } from "typeorm";
 import { TvSeries } from "src/entities/tv-series.entity";
 import { AddTvSeriesDto } from "src/dtos/tv-series/add.tv-series.dto";
 import { ApiResponse } from "src/misc/api.response.class";
+import { EditTvSeriesDto } from "src/dtos/tv-series/edit.tv-series.dto copy";
 
 @Injectable()
 export class TvSeriesService extends TypeOrmCrudService<TvSeries>{
@@ -32,4 +33,34 @@ export class TvSeriesService extends TypeOrmCrudService<TvSeries>{
             ]
         })
     }
+    
+    async editFullTvSeries(tvSeriesId: number, data: EditTvSeriesDto): Promise<ApiResponse | TvSeries>{
+        const existingTvSeries: TvSeries = await this.tvSeries.findOne(tvSeriesId);
+        
+        if(!existingTvSeries){
+            return new ApiResponse('error', -5001, 'TvSeries not found.')
+        }
+
+        existingTvSeries.titleSrb = data.titleSrb;
+        existingTvSeries.titleEng = data.titleEng;
+        existingTvSeries.synopsis = data.synopsis;
+        existingTvSeries.director = data.director;
+        existingTvSeries.categoryId = data.categoryId;
+        existingTvSeries.genreId    = data.genreId;
+        
+        const savedTvSeries: TvSeries = await this.tvSeries.save(existingTvSeries);
+
+        if(!savedTvSeries){
+            return new ApiResponse('error', -5001, 'Could not save new TV Series data.')
+        }
+
+        return await this.tvSeries.findOne(tvSeriesId, {
+            relations: [
+                "category",
+                "genre"
+            ]
+        })
+
+    }
+
 }

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req, Delete } from "@nestjs/common";
+import { Controller, Post, Body, UploadedFile, Param, UseInterceptors, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { Episode } from "src/entities/episode.entity";
 import { EpisodeService } from "src/services/episode/episode.service";
@@ -12,6 +12,7 @@ import { StorageConfig } from "config/storage.config";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditEpisodeDto } from "src/dtos/episode/edit.episode.dto copy";
 
 @Controller('api/episode')
 @Crud({
@@ -46,6 +47,9 @@ import * as sharp from 'sharp';
                 eager: true
             }
         }
+    },
+    routes:{
+        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
     }
 })
 export class EpisodeController{
@@ -58,6 +62,10 @@ export class EpisodeController{
         return this.service.createFullEpisode(data);
     }
 
+    @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    editFullEpisode(@Param('id') id: number, @Body() data: EditEpisodeDto){
+        return this.service.editFullEpisode(id, data);
+    }
     
     @Post(':id/upload-photo/') // http://localhost:3000/api/episode/:id/upload-photo/
     @UseInterceptors(
