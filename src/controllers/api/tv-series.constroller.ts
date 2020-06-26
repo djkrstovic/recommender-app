@@ -9,6 +9,8 @@ import { StorageConfig } from "config/storage.config";
 import { ApiResponse } from "src/misc/api.response.class";
 import { PhotoTvSeries } from "entities/photo-tv-series.entity";
 import { PhotoTvSeriesService } from "src/services/photo-tv-series/photo-tv-series.service";
+import * as fileType from 'file-type';
+import * as fs from 'fs';
 
 @Controller('api/series')
 @Crud({
@@ -114,6 +116,24 @@ export class TvSeriesController{
         if(!photo){
             return new ApiResponse('error', -4002, 'File not uploaded!');
         }
+
+        // Real Mime Type check
+        const fileTypeResult = await fileType.fromFile(photo.path);
+        if(!fileTypeResult){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Cannot detect file type!');
+        }
+
+        const realMimetype = fileTypeResult.mime;
+        
+        if(!(realMimetype.includes('jpeg') || realMimetype.includes('png'))){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Bad file content type!');
+
+        }
+
         const newPhotoTvSeries: PhotoTvSeries = new PhotoTvSeries();
         newPhotoTvSeries.tvSeriesId = tvSeriesId;
         newPhotoTvSeries.imagePath = photo.filename;

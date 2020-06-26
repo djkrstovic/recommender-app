@@ -9,6 +9,8 @@ import { StorageConfig } from "config/storage.config";
 import { PhotoMovieService } from "src/services/photo-movie/photo-movie.service";
 import { PhotoMovie } from "entities/photo-movie.entity";
 import { ApiResponse } from "src/misc/api.response.class";
+import * as fileType from 'file-type';
+import * as fs from 'fs';
 
 @Controller('api/movie')
 @Crud({
@@ -122,6 +124,24 @@ import { ApiResponse } from "src/misc/api.response.class";
         if(!photo){
             return new ApiResponse('error', -4002, 'File not uploaded!');
         }
+
+
+        // Real Mime Type check
+        const fileTypeResult = await fileType.fromFile(photo.path);
+        if(!fileTypeResult){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Cannot detect file type!');
+        }
+
+        const realMimetype = fileTypeResult.mime;
+        
+        if(!(realMimetype.includes('jpeg') || realMimetype.includes('png'))){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Bad file content type!');
+
+        }
     
         // let imagePath = photo.filename; // u zapis u BP
 
@@ -132,11 +152,13 @@ import { ApiResponse } from "src/misc/api.response.class";
         const savedPhotoMovie = await this.photoMovieService.add(newPhotoMovie);
 
         if(!savedPhotoMovie){
-            
+
             return new ApiResponse('error', -4001);
         }
 
         return savedPhotoMovie;
     }
+
+    
 
 }

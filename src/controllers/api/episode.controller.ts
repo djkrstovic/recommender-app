@@ -9,6 +9,8 @@ import { PhotoEpisodeService } from "src/services/photo-episode/photo-episode.se
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { StorageConfig } from "config/storage.config";
+import * as fileType from 'file-type';
+import * as fs from 'fs';
 
 @Controller('api/episode')
 @Crud({
@@ -121,6 +123,23 @@ export class EpisodeController{
 
         if(!photo){
             return new ApiResponse('error', -4002, 'File not uploaded!');
+        }
+
+        // Real Mime Type check
+        const fileTypeResult = await fileType.fromFile(photo.path);
+        if(!fileTypeResult){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Cannot detect file type!');
+        }
+
+        const realMimetype = fileTypeResult.mime;
+        
+        if(!(realMimetype.includes('jpeg') || realMimetype.includes('png'))){
+            // obrisati taj fajl
+            fs.unlinkSync(photo.path)
+            return new ApiResponse('error', -4002, 'Bad file content type!');
+
         }
 
         const newPhotoEpisode: PhotoEpisode = new PhotoEpisode();
