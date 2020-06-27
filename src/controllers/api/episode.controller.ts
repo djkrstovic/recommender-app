@@ -51,7 +51,22 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
         }
     },
     routes:{
-        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
+        only:[
+            "getManyBase",
+            "getOneBase",
+        ],
+        getManyBase:{
+            decorators:[
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator', 'user'),
+            ]
+        },
+        getOneBase:{
+            decorators:[
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator', 'user'),
+            ]
+        },
     }
 })
 export class EpisodeController{
@@ -66,7 +81,7 @@ export class EpisodeController{
         return this.service.createFullEpisode(data);
     }
 
-    @Patch(':id') // PATCH http://localhost:3000/api/movie/2/
+    @Patch(':id') // PATCH http://localhost:3000/api/episode/2/
     @UseGuards(RoleCheckerGuard)
     @AllowToRoles('administrator')
     editFullEpisode(@Param('id') id: number, @Body() data: EditEpisodeDto){

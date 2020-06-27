@@ -54,7 +54,22 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
         }
     },
     routes:{
-        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
+        only:[
+            "getManyBase",
+            "getOneBase",
+        ],
+        getManyBase:{
+            decorators:[
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator', 'user'),
+            ]
+        },
+        getOneBase:{
+            decorators:[
+                UseGuards(RoleCheckerGuard),
+                AllowToRoles('administrator', 'user'),
+            ]
+        },
     }
 })
     export class MovieController{
