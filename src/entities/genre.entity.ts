@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Movie } from "./movie.entity";
 import { TvSeries } from "./tv-series.entity";
+import * as Validator from 'class-validator';
 
 @Entity("genre")
 export class Genre {
@@ -8,6 +9,9 @@ export class Genre {
   genreId: number;
 
   @Column({ type: "varchar", name: "name", nullable: true, length: 64 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 64)
   name: string | null;
 
   @OneToMany(() => Movie, (movie) => movie.genre)

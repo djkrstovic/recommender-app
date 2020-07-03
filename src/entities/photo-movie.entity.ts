@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Movie } from "./movie.entity";
+import * as Validator from 'class-validator';
 
 @Index("fk_photo_movie_movie", ["movieId"], {})
 @Index("uq_photo_movie_image_path", ["imagePath"], { unique: true })
@@ -29,6 +30,9 @@ export class PhotoMovie {
     unique: true,
     length: 128,
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 128)
   imagePath: string | null;
 
   @ManyToOne(() => Movie, (movie) => movie.photoMovies, {

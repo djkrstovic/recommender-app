@@ -16,6 +16,7 @@ import { StatusUserMovie } from "./status-user-movie.entity";
 import { TagMovie } from "./tag-movie.entity";
 import { Tag } from "./tag.entity";
 import { PhotoMovie } from "./photo-movie.entity";
+import * as Validator from 'class-validator';
 
 @Index("fk_movie_category_id", ["categoryId"], {})
 @Index("fk_movie_genre_id", ["genreId"], {})
@@ -25,15 +26,27 @@ export class Movie {
   movieId: number;
 
   @Column({ type: "varchar", name: "title_srb", nullable: true, length: 64 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 64)
   titleSrb: string | null;
 
   @Column({ type: "varchar", name: "title_eng", nullable: true, length: 64 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 64)
   titleEng: string | null;
 
   @Column({ type: "varchar", name: "director", nullable: true, length: 64 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 64)
   director: string | null;
 
   @Column({ type: "text", name: "synopsis", nullable: true })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(10, 10000)
   synopsis: string | null;
 
   @Column({ type: "int", name: "category_id", unsigned: true })

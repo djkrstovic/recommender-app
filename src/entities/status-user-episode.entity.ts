@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Episode } from "./episode.entity";
 import { User } from "./user.entity";
+import * as Validator from 'class-validator';
 
 @Index("fk_status_user_episode_episode_id", ["episodeId"], {})
 @Index("fk_status_user_episode_user_id", ["userId"], {})
@@ -31,6 +32,8 @@ export class StatusUserEpisode {
     name: "status",
     enum: ["gledao", "zeli da gleda", "ne zeli da gleda"],
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsIn(["gledao", "zeli da gleda", "ne zeli da gleda"])
   status: "gledao" | "zeli da gleda" | "ne zeli da gleda";
 
   @ManyToOne(() => Episode, (episode) => episode.statusUserEpisodes, {

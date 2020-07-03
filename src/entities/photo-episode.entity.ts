@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Episode } from "./episode.entity";
+import * as Validator from 'class-validator';
 
 @Index("fk_photo_episode_episode", ["episodeId"], {})
 @Index("uq_photo_episode_image_path", ["imagePath"], { unique: true })
@@ -29,6 +30,9 @@ export class PhotoEpisode {
     unique: true,
     length: 128,
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 128)
   imagePath: string | null;
 
   @ManyToOne(() => Episode, (episode) => episode.photoEpisodes, {

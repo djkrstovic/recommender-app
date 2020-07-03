@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { TagEpisode } from "./tag-episode.entity";
 import { TagMovie } from "./tag-movie.entity";
+import * as Validator from 'class-validator';
 
 @Index("uq_tag_tag_name", ["tagName"], { unique: true })
 @Entity("tag")
@@ -20,6 +21,9 @@ export class Tag {
     unique: true,
     length: 64
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3, 64)
   tagName: string;
 
   @OneToMany(() => TagEpisode, (tagEpisode) => tagEpisode.tag)
