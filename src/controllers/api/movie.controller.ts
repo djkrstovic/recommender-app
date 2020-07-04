@@ -15,6 +15,7 @@ import * as sharp from 'sharp';
 import { EditMovieDto } from "src/dtos/movie/edit.movie.dto";
 import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+// import { MovieSearchDto } from "src/dtos/movie/movie.search.dto";
 
 @Controller('api/movie')
 @Crud({
@@ -257,8 +258,12 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
         return new ApiResponse('ok', 0, 'One photo deleted!');
 
     }
-
-    
-
-
+    /*
+    @Post('search')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator', 'user')
+    async search(@Body() data: MovieSearchDto): Promise<Movie[]>{
+        return await this.service.search(data);
+    }
+    */
 }
