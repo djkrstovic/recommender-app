@@ -699,6 +699,28 @@
 					"response": []
 				},
 				{
+					"name": "Get many movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movie/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movie",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all movies",
 					"request": {
 						"method": "GET",
@@ -1035,6 +1057,37 @@
 							"body": "{\n    \"status\": \"ok\",\n    \"errorCode\": 0,\n    \"message\": \"One photo deleted!\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Seach movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tagId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movie/search/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movie",
+								"search",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -1042,7 +1095,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlkIjoxLCJpZGVudGl0eSI6ImFkbWluIiwiZXhwIjoxNTk0NDI2NTA0LjY2NywiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5MzIxNjkwNH0.D9cLE6ayoyva5poeCuqTBhxnKigJo6RLOck5057QdU0",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo1LCJpZGVudGl0eSI6InRlc3QxQHRlc3QuY29tIiwiZXhwIjoxNTk1MDcxODgxLjMzMSwiaXAiOiI6OmZmZmY6MTI3LjAuMC4xIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTM4NjIyODF9.swJk8xIGry1JU7BMnhZizaYv9goG21Mwxns_H3xApXE",
 						"type": "string"
 					}
 				]
@@ -3717,7 +3770,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"password\": \"test1@test.com\"\r\n}",
 							"options": {
 								"raw": {}
 							}
@@ -3768,7 +3821,223 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Register a new user account - password must be longer than or equal to 6 chars",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"password\": \"abc1\",    \r\n    \"forename\": \"Milan\",\r\n    \"surname\": \"Milanovic\",\r\n    \"phoneNumber\": \"+381113304564\",\r\n    \"postalAddress\": \"Ulica Nevinih Zrtava 5, Stari Grad, Beograd\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/register/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6c-Ya2Yfj5/JUqx0b/eFatsSmvRYpY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jul 2020 17:15:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"password must be longer than or equal to 6 characters\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+						},
+						{
+							"name": "Register a new user account - phone number must be a valid phone number",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"password\": \"abc123\",    \r\n    \"forename\": \"Milan\",\r\n    \"surname\": \"Milanovic\",\r\n    \"phoneNumber\": \"+3814444444\",\r\n    \"postalAddress\": \"Ulica Nevinih Zrtava 5, Stari Grad, Beograd\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/register/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-yqqPc9OsTdN75rQm8U62oA9KPVg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jul 2020 17:15:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"phoneNumber must be a valid phone number\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh user token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo1LCJpZGVudGl0eSI6InRlc3QxQHRlc3QuY29tIiwiZXhwIjoxNTk2NTY1OTA1LjA5NCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5Mzg4NzUwNX0.E73bWqC235H7skskClL9myv_qH13aCyd0eEcRbYDmtA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/user/refresh/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"user",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Refresh user token - answer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo1LCJpZGVudGl0eSI6InRlc3QxQHRlc3QuY29tIiwiZXhwIjoxNTk2NTY1OTA1LjA5NCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5Mzg4NzUwNX0.E73bWqC235H7skskClL9myv_qH13aCyd0eEcRbYDmtA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/refresh/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "620"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26c-/v7MI0xrn4JsKA7LriMIr1k2sdw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Jul 2020 18:31:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"identity\": \"test1@test.com\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo1LCJpZGVudGl0eSI6InRlc3QxQHRlc3QuY29tIiwiZXhwIjoxNTkzODg3ODE4LjE0NCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5Mzg4NzUxOH0.1i4XapXmGOx9MM1HiZVfnUTc3p8xUVe9nTIiCNAtjtI\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo1LCJpZGVudGl0eSI6InRlc3QxQHRlc3QuY29tIiwiZXhwIjoxNTk2NTY1OTA1LjA5NCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5Mzg4NzUwNX0.E73bWqC235H7skskClL9myv_qH13aCyd0eEcRbYDmtA\",\n    \"refreshTokenExpiresAt\": \"2020-08-04T18:31:45.094Z\"\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
