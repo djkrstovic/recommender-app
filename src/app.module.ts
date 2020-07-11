@@ -42,6 +42,7 @@ import { PhotoMovieService } from './services/photo-movie/photo-movie.service';
 import { PhotoEpisodeService } from './services/photo-episode/photo-episode.service';
 import { PhotoTvSeriesService } from './services/photo-tv-series/photo-tv-series.service';
 import { UserToken } from './entities/user-token.entity';
+import { AdministratorToken } from './entities/administrator-token.entity';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { UserToken } from './entities/user-token.entity';
         PhotoEpisode,
         PhotoTvSeries,
         UserToken,
+        AdministratorToken,
        ]
     }),
     TypeOrmModule.forFeature([
@@ -92,6 +94,7 @@ import { UserToken } from './entities/user-token.entity';
         PhotoEpisode,
         PhotoTvSeries,
         UserToken,
+        AdministratorToken,
     ])
 
   ],
